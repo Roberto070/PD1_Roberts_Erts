@@ -1,6 +1,5 @@
-Vārds: 21
-Uzvārds: 12
-Lietotājvārds: 12
-Parole: 123
-Lietotāja tips: Skolēns
+Vārds: 
+Uzvārds: 
+Lietotājvārds: 
+Parole: 
 ----------------------------

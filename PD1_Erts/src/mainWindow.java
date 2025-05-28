@@ -274,17 +274,17 @@ public class mainWindow extends javax.swing.JFrame {
                     .addComponent(registrationRadioButton1)
                     .addComponent(registrationRadioButton2)
                     .addComponent(registrationLabel7))
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(registrationButton1)
                 .addGap(18, 18, 18)
                 .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(registrationButton2)
                     .addComponent(registrationLabel8))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         registration.getContentPane().add(registrationPanel);
-        registrationPanel.setBounds(122, 48, 556, 476);
+        registrationPanel.setBounds(122, 48, 556, 504);
 
         registrationBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         registration.getContentPane().add(registrationBackground);
@@ -316,6 +316,11 @@ public class mainWindow extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton2.setText("Atteikties no konta");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout studentTestPanelLayout = new javax.swing.GroupLayout(studentTestPanel);
         studentTestPanel.setLayout(studentTestPanelLayout);
@@ -347,7 +352,7 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         studentTest.getContentPane().add(studentTestPanel);
-        studentTestPanel.setBounds(236, 200, 0, 0);
+        studentTestPanel.setBounds(236, 200, 327, 198);
 
         studentTestBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         studentTest.getContentPane().add(studentTestBackground);
@@ -371,12 +376,27 @@ public class mainWindow extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton1.setText("Sakt testu");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton3.setText("Atteikties no konta");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton4.setText("Testa statuss");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout teacherTestPanelLayout = new javax.swing.GroupLayout(teacherTestPanel);
         teacherTestPanel.setLayout(teacherTestPanelLayout);
@@ -413,7 +433,7 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         teacherTest.getContentPane().add(teacherTestPanel);
-        teacherTestPanel.setBounds(237, 185, 0, 0);
+        teacherTestPanel.setBounds(237, 185, 327, 230);
 
         teacherTestBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         teacherTest.getContentPane().add(teacherTestBackground);
@@ -437,21 +457,51 @@ public class mainWindow extends javax.swing.JFrame {
 
         question1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question1.setText("1");
+        question1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question1ActionPerformed(evt);
+            }
+        });
 
         question2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question2.setText("2");
+        question2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question2ActionPerformed(evt);
+            }
+        });
 
         question3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question3.setText("3");
+        question3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question3ActionPerformed(evt);
+            }
+        });
 
         question4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question4.setText("4");
+        question4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question4ActionPerformed(evt);
+            }
+        });
 
         question5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question5.setText("5");
+        question5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question5ActionPerformed(evt);
+            }
+        });
 
         question6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question6.setText("6");
+        question6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question6ActionPerformed(evt);
+            }
+        });
 
         question7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question7.setText("7");
@@ -463,12 +513,27 @@ public class mainWindow extends javax.swing.JFrame {
 
         question8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question8.setText("8");
+        question8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question8ActionPerformed(evt);
+            }
+        });
 
         question9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question9.setText("9");
+        question9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question9ActionPerformed(evt);
+            }
+        });
 
         question10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question10.setText("10");
+        question10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question10ActionPerformed(evt);
+            }
+        });
 
         question11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question11.setText("11");
@@ -480,33 +545,83 @@ public class mainWindow extends javax.swing.JFrame {
 
         question12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question12.setText("12");
+        question12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question12ActionPerformed(evt);
+            }
+        });
 
         question13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question13.setText("13");
+        question13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question13ActionPerformed(evt);
+            }
+        });
 
         question14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question14.setText("14");
+        question14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question14ActionPerformed(evt);
+            }
+        });
 
         question15.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question15.setText("15");
+        question15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question15ActionPerformed(evt);
+            }
+        });
 
         question16.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question16.setText("16");
+        question16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question16ActionPerformed(evt);
+            }
+        });
 
         question17.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question17.setText("17");
+        question17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question17ActionPerformed(evt);
+            }
+        });
 
         question18.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question18.setText("18");
+        question18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question18ActionPerformed(evt);
+            }
+        });
 
         question19.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question19.setText("19");
+        question19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question19ActionPerformed(evt);
+            }
+        });
 
         question20.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question20.setText("20");
+        question20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                question20ActionPerformed(evt);
+            }
+        });
 
         questionEndButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         questionEndButton.setText("Pabeigt darbu");
+        questionEndButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                questionEndButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout questionPanel2Layout = new javax.swing.GroupLayout(questionPanel2);
         questionPanel2.setLayout(questionPanel2Layout);
@@ -617,7 +732,7 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         testQuestion.getContentPane().add(questionPanel2);
-        questionPanel2.setBounds(610, 20, 0, 0);
+        questionPanel2.setBounds(610, 20, 166, 548);
 
         questionPanel1.setBackground(new java.awt.Color(255, 255, 255));
         questionPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -639,6 +754,11 @@ public class mainWindow extends javax.swing.JFrame {
 
         nextQuestionButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         nextQuestionButton.setText("Talak");
+        nextQuestionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextQuestionButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout questionPanel1Layout = new javax.swing.GroupLayout(questionPanel1);
         questionPanel1.setLayout(questionPanel1Layout);
@@ -675,7 +795,7 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         testQuestion.getContentPane().add(questionPanel1);
-        questionPanel1.setBounds(25, 120, 0, 0);
+        questionPanel1.setBounds(25, 120, 566, 369);
 
         testBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         testQuestion.getContentPane().add(testBackground);
@@ -717,9 +837,19 @@ public class mainWindow extends javax.swing.JFrame {
 
         seeAnswerButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         seeAnswerButton.setText("Apskatīt atbildes");
+        seeAnswerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seeAnswerButtonActionPerformed(evt);
+            }
+        });
 
         resultEndButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         resultEndButton.setText("Beigt");
+        resultEndButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resultEndButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout resultPanelLayout = new javax.swing.GroupLayout(resultPanel);
         resultPanel.setLayout(resultPanelLayout);
@@ -782,7 +912,7 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         result.getContentPane().add(resultPanel);
-        resultPanel.setBounds(213, 146, 0, 0);
+        resultPanel.setBounds(213, 146, 382, 277);
 
         resultBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         result.getContentPane().add(resultBackground);
@@ -927,7 +1057,7 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         getContentPane().add(mainPanel1);
-        mainPanel1.setBounds(202, 30, 396, 503);
+        mainPanel1.setBounds(202, 30, 396, 519);
 
         mainBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         getContentPane().add(mainBackground);
@@ -967,7 +1097,7 @@ public class mainWindow extends javax.swing.JFrame {
 
     private void registrationButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrationButton1ActionPerformed
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Lietotaji.txt", true))) {
-            if(registrationTextField4.getText().equals(registrationTextField5.getText()))
+            if(registrationTextField4.getText().equals(registrationTextField5.getText()) && !"".equals(registrationTextField1.getText()) && !"".equals(registrationTextField2.getText()) && !"".equals(registrationTextField3.getText()) && !"".equals(registrationTextField4.getText()) && !"".equals(registrationTextField5.getText()))
             {
                 writer.write("Vārds: " + registrationTextField1.getText());
                 writer.newLine();
@@ -1003,9 +1133,13 @@ public class mainWindow extends javax.swing.JFrame {
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "Paroles naw vienāds!", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Nepareizi ievadīti dati!", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                registrationTextField1.setText("");
+                registrationTextField2.setText("");
+                registrationTextField3.setText("");
                 registrationTextField4.setText("");
                 registrationTextField5.setText("");
+                registrationButtonGroup.clearSelection();
             }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Kļūda saglabājot datus!", "Kļuda", JOptionPane.ERROR_MESSAGE);
@@ -1031,6 +1165,110 @@ public class mainWindow extends javax.swing.JFrame {
         testQuestion.setLocationRelativeTo(null);
         testQuestion.setVisible(true);
     }//GEN-LAST:event_studentStartTestButtonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void nextQuestionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextQuestionButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nextQuestionButtonActionPerformed
+
+    private void question1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question1ActionPerformed
+
+    private void question2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question2ActionPerformed
+
+    private void question3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question3ActionPerformed
+
+    private void question4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question4ActionPerformed
+
+    private void question5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question5ActionPerformed
+
+    private void question6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question6ActionPerformed
+
+    private void question8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question8ActionPerformed
+
+    private void question9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question9ActionPerformed
+
+    private void question10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question10ActionPerformed
+
+    private void question12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question12ActionPerformed
+
+    private void question13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question13ActionPerformed
+
+    private void question14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question14ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question14ActionPerformed
+
+    private void question15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question15ActionPerformed
+
+    private void question16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question16ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question16ActionPerformed
+
+    private void question17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question17ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question17ActionPerformed
+
+    private void question18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question18ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question18ActionPerformed
+
+    private void question19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question19ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question19ActionPerformed
+
+    private void question20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question20ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_question20ActionPerformed
+
+    private void questionEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questionEndButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_questionEndButtonActionPerformed
+
+    private void seeAnswerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeAnswerButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_seeAnswerButtonActionPerformed
+
+    private void resultEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultEndButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resultEndButtonActionPerformed
 
     /**
      * @param args the command line arguments
