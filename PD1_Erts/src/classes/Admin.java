@@ -9,15 +9,17 @@ package classes;
  * @author Roberts Erts
  */
 class Admin extends User{
-    public Admin(String name, String login, String password) {
-        super(name, login, password);
+    public Admin(String name, String surname, String login, String password) {
+        super(name, surname, login, password);
     }
 
-    public void startTest() {
-        // start test logic for admin
+    public void startTest(Test test, boolean state) {
+        if (state) {
+            test.startTest();
+        } else {
+            test.endTest();
+        }
+
     }
 
-    public void seeAnswers() {
-        // view answers logic
-    }
 }

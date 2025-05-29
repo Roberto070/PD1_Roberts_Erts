@@ -4,26 +4,29 @@
  */
 package classes;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Roberts Erts
  */
 public class User{
+    
+    private ArrayList<Result> results = new ArrayList();
+    
     private String name;
+    private String surname;
     private String login;
     private String password;
 
-    public User(String name, String login, String password) {
+    public User(String name, String surname, String login, String password) {
         this.name = name;
         this.login = login;
         this.password = password;
     }
-
+    
     public boolean enter(String login, String password) {
         return this.login.equals(login) && this.password.equals(password);
     }
 
-    public String getName() { return name; }
-    public String getLogin() { return login; }
-    public String getPassword() { return password; }
 }

@@ -27,8 +27,8 @@ public class DistanceExamenator{
         app.save();
     }
 
-    public void addUser(String name, String login, String password) {
-        users.add(new Student(name, login, password));
+    public void addUser(String name, String surname, String login, String password) {
+        users.add(new Student(name, surname, login, password));
     }
 
     public User findUser(String login, String password) {
@@ -41,8 +41,8 @@ public class DistanceExamenator{
         return null;
     }
 
-    public void addQuestion(String text, String correctAnswer, String[] options) {
-        questions.add(new Question(text, correctAnswer, options));
+    public void addQuestion(String text, String[] answer, int correctAnswer) {
+        questions.add(new Question(text, answer, correctAnswer));
     }
 
     public void save() {

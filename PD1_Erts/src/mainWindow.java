@@ -352,7 +352,7 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         studentTest.getContentPane().add(studentTestPanel);
-        studentTestPanel.setBounds(236, 200, 327, 198);
+        studentTestPanel.setBounds(236, 200, 0, 0);
 
         studentTestBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         studentTest.getContentPane().add(studentTestBackground);
@@ -433,7 +433,7 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         teacherTest.getContentPane().add(teacherTestPanel);
-        teacherTestPanel.setBounds(237, 185, 327, 230);
+        teacherTestPanel.setBounds(237, 185, 0, 0);
 
         teacherTestBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         teacherTest.getContentPane().add(teacherTestBackground);
@@ -732,7 +732,7 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         testQuestion.getContentPane().add(questionPanel2);
-        questionPanel2.setBounds(610, 20, 166, 548);
+        questionPanel2.setBounds(610, 20, 0, 0);
 
         questionPanel1.setBackground(new java.awt.Color(255, 255, 255));
         questionPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -795,7 +795,7 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         testQuestion.getContentPane().add(questionPanel1);
-        questionPanel1.setBounds(25, 120, 566, 369);
+        questionPanel1.setBounds(25, 120, 0, 0);
 
         testBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         testQuestion.getContentPane().add(testBackground);
@@ -912,7 +912,7 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         result.getContentPane().add(resultPanel);
-        resultPanel.setBounds(213, 146, 382, 277);
+        resultPanel.setBounds(213, 146, 0, 0);
 
         resultBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         result.getContentPane().add(resultBackground);

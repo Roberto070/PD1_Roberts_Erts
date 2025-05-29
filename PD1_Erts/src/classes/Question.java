@@ -10,24 +10,29 @@ package classes;
  */
 public class Question{
     private String text;
-    private String correctAnswer;
-    private String[] options;
+    private String[] answer;
+    private int correctAnswer;
 
-    public Question(String text, String correctAnswer, String[] options) {
+    public Question(String text, String[] answer, int correctAnswer) {
         this.text = text;
+        this.answer = answer;
         this.correctAnswer = correctAnswer;
-        this.options = options;
     }
 
     public String getText() {
         return text;
     }
 
-    public String[] getOptions() {
-        return options;
+    public String[] getAnswers() {
+        return answer;
+    }
+    
+    public int getCorrectAnswer(){
+        return correctAnswer;
     }
 
-    public boolean isCorrect(String answer) {
-        return correctAnswer.equals(answer);
+    public boolean isCorrect(int answer) {
+        return answer == correctAnswer;
     }
+
 }

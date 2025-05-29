@@ -4,31 +4,36 @@
  */
 package classes;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Roberts Erts
  */
 public class Student extends User{
-    private int questionCount = 0;
-    private int rightAnswer = 0;
+    private ArrayList<Result> results = new ArrayList();
 
-    public Student(String name, String login, String password) {
-        super(name, login, password);
+    public Student(String name, String surname, String login, String password) {
+        super(name, surname, login, password);
     }
 
-    public void getAnswer(Question question, String answer) {
-        questionCount++;
-        if (question.isCorrect(answer)) {
-            rightAnswer++;
+    public Result getResult(Test test) {
+        for (Result result : results) {
+            if (result.getTest() == test) {
+                return result;
+            }
+        }
+        return null;
+    }
+
+    public void saveResult(Test test, int questionCount, int rightAnswer) {
+        Result result = getResult(test);
+
+        if (result == null) {
+            results.add(new Result(test, questionCount, rightAnswer));
+        } else {
+            result.setResult(questionCount, rightAnswer);
         }
     }
 
-    public void clear() {
-        questionCount = 0;
-        rightAnswer = 0;
-    }
-
-    public int getScore() {
-        return rightAnswer;
-    }
 }

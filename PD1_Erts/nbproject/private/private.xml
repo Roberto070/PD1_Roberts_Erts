@@ -4,7 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/NetBeansProjects/PD1_Erts/src/classes/DistanceExamenator.java</file>
+            <file>file:/C:/NetBeansProjects/PD1_Erts/src/classes/Admin.java</file>
+            <file>file:/C:/NetBeansProjects/PD1_Erts/src/classes/User.java</file>
+            <file>file:/C:/NetBeansProjects/PD1_Erts/src/classes/Test.java</file>
+            <file>file:/C:/NetBeansProjects/PD1_Erts/src/classes/Result.java</file>
             <file>file:/C:/NetBeansProjects/PD1_Erts/src/mainWindow.java</file>
+            <file>file:/C:/NetBeansProjects/PD1_Erts/src/classes/Question.java</file>
+            <file>file:/C:/NetBeansProjects/PD1_Erts/src/classes/Student.java</file>
         </group>
     </open-files>
 </project-private>
