@@ -19,31 +19,20 @@ import java.util.List;
 public class DistanceExamenator{
     private List<User> users = new ArrayList<>();
     private List<Question> questions = new ArrayList<>();
-    private User currentUser;
+    private String name;
+    private boolean work = false;
 
-    public static void main(String[] args) {
-        DistanceExamenator app = new DistanceExamenator();
-        app.load();
-        app.save();
+    public DistanceExamenator(boolean work, String name, ArrayList questions) {
+        this.work = work;
+        this.name = name;
+        this.questions = questions;
     }
+    
 
     public void addUser(String name, String surname, String login, String password) {
         users.add(new Student(name, surname, login, password));
     }
 
-    public User findUser(String login, String password) {
-        for (User u : users) {
-            if (u.enter(login, password)) {
-                currentUser = u;
-                return u;
-            }
-        }
-        return null;
-    }
-
-    public void addQuestion(String text, String[] answer, int correctAnswer) {
-        questions.add(new Question(text, answer, correctAnswer));
-    }
 
     public void save() {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("users.dat"))) {
@@ -84,4 +73,21 @@ public class DistanceExamenator{
     public void getAvgResults() {
         // Implement average calculation
     }
+    
+    public String getName(){
+        return name;
+    }
+    
+    public void startTest(){
+        work = true;
+    }
+    
+    public void endTest(){
+        work = false;
+    }
+
+    public boolean isWork() {
+        return work;
+    }
+
 }

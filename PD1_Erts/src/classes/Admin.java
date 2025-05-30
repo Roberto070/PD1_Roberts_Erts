@@ -13,7 +13,7 @@ class Admin extends User{
         super(name, surname, login, password);
     }
 
-    public void startTest(Test test, boolean state) {
+    public void startTest(DistanceExamenator test, boolean state) {
         if (state) {
             test.startTest();
         } else {

@@ -9,18 +9,18 @@ package classes;
  * @author Roberts Erts
  */
 public class Result {
-    private final Test test;
+    private final DistanceExamenator test;
     
     private int questionsCount = 0;
     private int rightAnswer = 0;
     
-    public Result(Test test, int questionsCount, int rightAnswer){
+    public Result(DistanceExamenator test, int questionsCount, int rightAnswer){
         this.test = test;
         this.questionsCount = questionsCount;
         this.rightAnswer = rightAnswer;
     }
     
-    public Test getTest(){
+    public DistanceExamenator getTest(){
         return test;
     }
     

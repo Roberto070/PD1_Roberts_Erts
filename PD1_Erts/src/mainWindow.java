@@ -284,7 +284,7 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         registration.getContentPane().add(registrationPanel);
-        registrationPanel.setBounds(122, 48, 556, 504);
+        registrationPanel.setBounds(122, 48, 556, 476);
 
         registrationBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         registration.getContentPane().add(registrationBackground);
@@ -1057,7 +1057,7 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         getContentPane().add(mainPanel1);
-        mainPanel1.setBounds(202, 30, 396, 519);
+        mainPanel1.setBounds(202, 30, 396, 503);
 
         mainBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         getContentPane().add(mainBackground);

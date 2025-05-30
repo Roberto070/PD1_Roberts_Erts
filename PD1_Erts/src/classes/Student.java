@@ -17,7 +17,7 @@ public class Student extends User{
         super(name, surname, login, password);
     }
 
-    public Result getResult(Test test) {
+    public Result getResult(DistanceExamenator test) {
         for (Result result : results) {
             if (result.getTest() == test) {
                 return result;
@@ -26,7 +26,7 @@ public class Student extends User{
         return null;
     }
 
-    public void saveResult(Test test, int questionCount, int rightAnswer) {
+    public void saveResult(DistanceExamenator test, int questionCount, int rightAnswer) {
         Result result = getResult(test);
 
         if (result == null) {
