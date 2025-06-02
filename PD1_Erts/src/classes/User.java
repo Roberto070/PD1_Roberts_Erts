@@ -4,15 +4,11 @@
  */
 package classes;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Roberts Erts
  */
 public class User{
-    
-    private ArrayList<Result> results = new ArrayList();
     
     private String name;
     private String surname;

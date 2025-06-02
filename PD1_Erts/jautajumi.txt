@@ -1,0 +1,20 @@
+1|Kāds ir galvaspilsētas nosaukums?|Rīga|Liepāja|Daugavpils|0
+2|Kurš ezers ir lielākais Latvijā?|Lubāns|Rāzna|Usmas ezers|1
+3|Kura jūra apskalo Latvijas krastus?|Baltijas jūra|Ziemeļu jūra|Melnā jūra|0
+4|Kura ir otra lielākā pilsēta Latvijā pēc iedzīvotāju skaita?||Liepāja|Daugavpils|Jelgava|1
+5|Kā sauc Latvijas nacionālo valūtu pirms eiro ieviešanas?|Rublis|Lats|Zlots|1
+6|Kāds ir Latvijas oficiālais valsts valodas nosaukums?|Latviešu|Krievu|Poļu|0
+7|Kādā datumā Latvija svin neatkarības dienu?|11. novembrī|4. maijā|18. novembrī|2
+8|Kura upe ir garākā Latvijā?|Daugava|Gauja|Venta|0
+9|Kurā gadā Latvija iestājās Eiropas Savienībā?|2004|1999|2010|0
+10|Kāds ir Latvijas karoga krāsu salikums?|Sarkans-balts-sarkans|Zaļš-dzeltens-zaļš|Zils-balts-zils|0
+11|Kura pilsēta ir pazīstama ar dzintara apstrādi?|Jūrmala|Liepāja|Ventspils|0
+12|Kur atrodas Brīvības piemineklis?|Rīgā|Daugavpilī|Valmierā|0
+13|Kā sauc latviešu pavasara svētku ēdienu ar zaļumiem?|Pankūkas|Sklandrauši|Aukstā zupa|2
+14|Kura Latvijas pilsēta ir slavena ar Dziesmu svētkiem?|Cēsis|Rīga|Kuldīga|1
+15|Kā sauc Latvijas prezidentu, kurš tika ievēlēts 2019. gadā?|Egils Levits|Andris Bērziņš|Raimonds Vējonis|0
+16|Kur atrodas Rundāles pils?|Talsos|Bauskā|Alūksnē|1
+17|Kura ir senākā pilsēta Latvijā?|Ludza|Sigulda|Tukums|0
+18|Kāds sporta veids ir populārākais Latvijā?|Basketbols|Futbols|Hokejs|2
+19|Kura Latvijas pilsēta atrodas vistālāk uz rietumiem?|Ventspils|Liepāja|Kolka|1
+20|Kura ir Latvijā lielākā sala?|Buļļu |Lielupe|Salacgrīva|0

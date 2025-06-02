@@ -4,11 +4,6 @@
  */
 package classes;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,40 +21,6 @@ public class DistanceExamenator{
         this.work = work;
         this.name = name;
         this.questions = questions;
-    }
-    
-
-    public void addUser(String name, String surname, String login, String password) {
-        users.add(new Student(name, surname, login, password));
-    }
-
-
-    public void save() {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("users.dat"))) {
-            out.writeObject(users);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("questions.dat"))) {
-            out.writeObject(questions);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void load() {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("users.dat"))) {
-            users = (List<User>) in.readObject();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("questions.dat"))) {
-            questions = (List<Question>) in.readObject();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public List<Question> getQuestions() {

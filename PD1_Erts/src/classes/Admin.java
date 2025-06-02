@@ -8,7 +8,8 @@ package classes;
  *
  * @author Roberts Erts
  */
-class Admin extends User{
+public class Admin extends User{
+    
     public Admin(String name, String surname, String login, String password) {
         super(name, surname, login, password);
     }
@@ -21,5 +22,4 @@ class Admin extends User{
         }
 
     }
-
 }

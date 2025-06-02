@@ -30,9 +30,7 @@ public class Question{
     public int getCorrectAnswer(){
         return correctAnswer;
     }
-
-    public boolean isCorrect(int answer) {
-        return answer == correctAnswer;
+    public String isCorrect(int correctAnswer){
+        return answer[correctAnswer];
     }
-
 }

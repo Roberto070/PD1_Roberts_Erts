@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
+import classes.*;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -13,10 +14,23 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Roberts Erts
+ * @author Roberts Erts 
  */
 public class mainWindow extends javax.swing.JFrame {
-
+    String name = "";
+    String surname = "";
+    String login = "";
+    String password = "";
+    String type = "";
+    User user = new Student(name, surname, login, password);
+    
+    int questionCount = 0;
+    String text = "";
+    String[] answer = {"","",""};
+    int correctAnswer = -1;
+    Question question = new Question(text, answer, correctAnswer);
+    
+    private boolean work;
     /**
      * Creates new form mainWindow
      */
@@ -55,24 +69,27 @@ public class mainWindow extends javax.swing.JFrame {
         registrationLabel8 = new javax.swing.JLabel();
         registrationBackground = new javax.swing.JLabel();
         registrationMenuBar = new javax.swing.JMenuBar();
+        exitRegistrationMenu = new javax.swing.JMenu();
         helpRegistrationMenu = new javax.swing.JMenu();
         registrationButtonGroup = new javax.swing.ButtonGroup();
         studentTest = new javax.swing.JDialog();
         studentTestPanel = new javax.swing.JPanel();
         stidentTestLabel = new javax.swing.JLabel();
         studentStartTestButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        studentExitButton = new javax.swing.JButton();
         studentTestBackground = new javax.swing.JLabel();
         studentTestMenuBar = new javax.swing.JMenuBar();
+        exitStudentTestMenu = new javax.swing.JMenu();
         helpStudentTestMenu = new javax.swing.JMenu();
         teacherTest = new javax.swing.JDialog();
         teacherTestPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        teacherStartTestButton1 = new javax.swing.JButton();
+        teacherExtButton = new javax.swing.JButton();
+        teacherTestStatusButton1 = new javax.swing.JButton();
         teacherTestBackground = new javax.swing.JLabel();
         teacherTestMenuBar = new javax.swing.JMenuBar();
+        exitTeacherTestMenu = new javax.swing.JMenu();
         helpTeacherTestMenu = new javax.swing.JMenu();
         testQuestion = new javax.swing.JDialog();
         questionPanel2 = new javax.swing.JPanel();
@@ -106,6 +123,7 @@ public class mainWindow extends javax.swing.JFrame {
         nextQuestionButton = new javax.swing.JButton();
         testBackground = new javax.swing.JLabel();
         testMenuBar = new javax.swing.JMenuBar();
+        exitTestMenu = new javax.swing.JMenu();
         helpTestMenu = new javax.swing.JMenu();
         questionButtonGroup = new javax.swing.ButtonGroup();
         result = new javax.swing.JDialog();
@@ -121,6 +139,7 @@ public class mainWindow extends javax.swing.JFrame {
         resultEndButton = new javax.swing.JButton();
         resultBackground = new javax.swing.JLabel();
         resultMenuBar = new javax.swing.JMenuBar();
+        exitResultMenu = new javax.swing.JMenu();
         helpResultMenu = new javax.swing.JMenu();
         mainPanel1 = new javax.swing.JPanel();
         mainPanel2 = new javax.swing.JPanel();
@@ -136,12 +155,13 @@ public class mainWindow extends javax.swing.JFrame {
         mainButton2 = new javax.swing.JButton();
         mainBackground = new javax.swing.JLabel();
         mainMenuBar = new javax.swing.JMenuBar();
+        exitMainMenu = new javax.swing.JMenu();
         helpMainMenu = new javax.swing.JMenu();
 
         registration.setTitle("Test");
-        registration.setMaximumSize(new java.awt.Dimension(800, 630));
         registration.setMinimumSize(new java.awt.Dimension(800, 630));
         registration.setModal(true);
+        registration.setPreferredSize(new java.awt.Dimension(800, 600));
         registration.getContentPane().setLayout(null);
 
         registrationPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -284,13 +304,26 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         registration.getContentPane().add(registrationPanel);
-        registrationPanel.setBounds(122, 48, 556, 476);
+        registrationPanel.setBounds(122, 48, 556, 504);
 
         registrationBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         registration.getContentPane().add(registrationBackground);
         registrationBackground.setBounds(0, 0, 800, 600);
 
+        exitRegistrationMenu.setText("Exit");
+        exitRegistrationMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitRegistrationMenuMouseClicked(evt);
+            }
+        });
+        registrationMenuBar.add(exitRegistrationMenu);
+
         helpRegistrationMenu.setText("Help");
+        helpRegistrationMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                helpRegistrationMenuMouseClicked(evt);
+            }
+        });
         registrationMenuBar.add(helpRegistrationMenu);
 
         registration.setJMenuBar(registrationMenuBar);
@@ -298,13 +331,14 @@ public class mainWindow extends javax.swing.JFrame {
         studentTest.setTitle("Test");
         studentTest.setMinimumSize(new java.awt.Dimension(800, 630));
         studentTest.setModal(true);
+        studentTest.setPreferredSize(new java.awt.Dimension(800, 600));
         studentTest.getContentPane().setLayout(null);
 
         studentTestPanel.setBackground(new java.awt.Color(255, 255, 255));
         studentTestPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         stidentTestLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        stidentTestLabel.setText("Tests “Nosaukums”");
+        stidentTestLabel.setText("Tests “Latvija”");
 
         studentStartTestButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         studentStartTestButton.setText("Sakt testu");
@@ -314,11 +348,11 @@ public class mainWindow extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton2.setText("Atteikties no konta");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        studentExitButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        studentExitButton.setText("Atteikties no konta");
+        studentExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                studentExitButtonActionPerformed(evt);
             }
         });
 
@@ -329,15 +363,15 @@ public class mainWindow extends javax.swing.JFrame {
             .addGroup(studentTestPanelLayout.createSequentialGroup()
                 .addGroup(studentTestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(studentTestPanelLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(stidentTestLabel))
-                    .addGroup(studentTestPanelLayout.createSequentialGroup()
                         .addGap(104, 104, 104)
                         .addComponent(studentStartTestButton))
                     .addGroup(studentTestPanelLayout.createSequentialGroup()
                         .addGap(69, 69, 69)
-                        .addComponent(jButton2)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                        .addComponent(studentExitButton))
+                    .addGroup(studentTestPanelLayout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(stidentTestLabel)))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         studentTestPanelLayout.setVerticalGroup(
             studentTestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,18 +381,31 @@ public class mainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(studentStartTestButton)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(studentExitButton)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
         studentTest.getContentPane().add(studentTestPanel);
-        studentTestPanel.setBounds(236, 200, 0, 0);
+        studentTestPanel.setBounds(236, 200, 327, 198);
 
         studentTestBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         studentTest.getContentPane().add(studentTestBackground);
         studentTestBackground.setBounds(0, 0, 800, 600);
 
+        exitStudentTestMenu.setText("Exit");
+        exitStudentTestMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitStudentTestMenuMouseClicked(evt);
+            }
+        });
+        studentTestMenuBar.add(exitStudentTestMenu);
+
         helpStudentTestMenu.setText("Help");
+        helpStudentTestMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                helpStudentTestMenuMouseClicked(evt);
+            }
+        });
         studentTestMenuBar.add(helpStudentTestMenu);
 
         studentTest.setJMenuBar(studentTestMenuBar);
@@ -366,35 +413,36 @@ public class mainWindow extends javax.swing.JFrame {
         teacherTest.setTitle("Test");
         teacherTest.setMinimumSize(new java.awt.Dimension(800, 630));
         teacherTest.setModal(true);
+        teacherTest.setPreferredSize(new java.awt.Dimension(800, 600));
         teacherTest.getContentPane().setLayout(null);
 
         teacherTestPanel.setBackground(new java.awt.Color(255, 255, 255));
         teacherTestPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Tests “Nosaukums”");
+        jLabel1.setText("Tests “Latvija”");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Sakt testu");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        teacherStartTestButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        teacherStartTestButton1.setText("Sakt testu");
+        teacherStartTestButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                teacherStartTestButton1ActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton3.setText("Atteikties no konta");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        teacherExtButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        teacherExtButton.setText("Atteikties no konta");
+        teacherExtButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                teacherExtButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton4.setText("Testa statuss");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        teacherTestStatusButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        teacherTestStatusButton1.setText("Testa statuss");
+        teacherTestStatusButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                teacherTestStatusButton1ActionPerformed(evt);
             }
         });
 
@@ -405,18 +453,18 @@ public class mainWindow extends javax.swing.JFrame {
             .addGroup(teacherTestPanelLayout.createSequentialGroup()
                 .addGroup(teacherTestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(teacherTestPanelLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel1))
-                    .addGroup(teacherTestPanelLayout.createSequentialGroup()
                         .addGap(68, 68, 68)
-                        .addComponent(jButton3))
+                        .addComponent(teacherExtButton))
                     .addGroup(teacherTestPanelLayout.createSequentialGroup()
                         .addGap(103, 103, 103)
-                        .addComponent(jButton1))
+                        .addComponent(teacherStartTestButton1))
                     .addGroup(teacherTestPanelLayout.createSequentialGroup()
                         .addGap(90, 90, 90)
-                        .addComponent(jButton4)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                        .addComponent(teacherTestStatusButton1))
+                    .addGroup(teacherTestPanelLayout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jLabel1)))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         teacherTestPanelLayout.setVerticalGroup(
             teacherTestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -424,29 +472,44 @@ public class mainWindow extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(teacherStartTestButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(teacherTestStatusButton1)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(teacherExtButton)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
         teacherTest.getContentPane().add(teacherTestPanel);
-        teacherTestPanel.setBounds(237, 185, 0, 0);
+        teacherTestPanel.setBounds(237, 185, 327, 230);
 
         teacherTestBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         teacherTest.getContentPane().add(teacherTestBackground);
         teacherTestBackground.setBounds(0, 0, 800, 600);
 
+        exitTeacherTestMenu.setText("Exit");
+        exitTeacherTestMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitTeacherTestMenuMouseClicked(evt);
+            }
+        });
+        teacherTestMenuBar.add(exitTeacherTestMenu);
+
         helpTeacherTestMenu.setText("Help");
+        helpTeacherTestMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                helpTeacherTestMenuMouseClicked(evt);
+            }
+        });
         teacherTestMenuBar.add(helpTeacherTestMenu);
 
         teacherTest.setJMenuBar(teacherTestMenuBar);
 
         testQuestion.setTitle("Test");
+        testQuestion.setMaximumSize(new java.awt.Dimension(800, 650));
         testQuestion.setMinimumSize(new java.awt.Dimension(800, 630));
         testQuestion.setModal(true);
+        testQuestion.setPreferredSize(new java.awt.Dimension(800, 600));
         testQuestion.getContentPane().setLayout(null);
 
         questionPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -732,12 +795,12 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         testQuestion.getContentPane().add(questionPanel2);
-        questionPanel2.setBounds(610, 20, 0, 0);
+        questionPanel2.setBounds(610, 20, 166, 548);
 
         questionPanel1.setBackground(new java.awt.Color(255, 255, 255));
         questionPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        questionLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        questionLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         questionLabel.setText("1. Jautajums “Jautajuma teksts”");
 
         questionButtonGroup.add(questionRadioButton1);
@@ -771,12 +834,12 @@ public class mainWindow extends javax.swing.JFrame {
                         .addGroup(questionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(questionRadioButton3)
                             .addComponent(questionRadioButton1)
-                            .addComponent(questionLabel)
-                            .addComponent(questionRadioButton2)))
+                            .addComponent(questionRadioButton2)
+                            .addComponent(questionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(questionPanel1Layout.createSequentialGroup()
                         .addGap(254, 254, 254)
                         .addComponent(nextQuestionButton)))
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         questionPanel1Layout.setVerticalGroup(
             questionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -789,19 +852,32 @@ public class mainWindow extends javax.swing.JFrame {
                 .addComponent(questionRadioButton2)
                 .addGap(30, 30, 30)
                 .addComponent(questionRadioButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(nextQuestionButton)
                 .addGap(30, 30, 30))
         );
 
         testQuestion.getContentPane().add(questionPanel1);
-        questionPanel1.setBounds(25, 120, 0, 0);
+        questionPanel1.setBounds(25, 120, 566, 369);
 
         testBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         testQuestion.getContentPane().add(testBackground);
         testBackground.setBounds(0, 0, 800, 600);
 
+        exitTestMenu.setText("Exit");
+        exitTestMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitTestMenuMouseClicked(evt);
+            }
+        });
+        testMenuBar.add(exitTestMenu);
+
         helpTestMenu.setText("Help");
+        helpTestMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                helpTestMenuMouseClicked(evt);
+            }
+        });
         testMenuBar.add(helpTestMenu);
 
         testQuestion.setJMenuBar(testMenuBar);
@@ -912,13 +988,26 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         result.getContentPane().add(resultPanel);
-        resultPanel.setBounds(213, 146, 0, 0);
+        resultPanel.setBounds(213, 146, 382, 277);
 
         resultBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         result.getContentPane().add(resultBackground);
         resultBackground.setBounds(0, 0, 800, 600);
 
+        exitResultMenu.setText("Exit");
+        exitResultMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitResultMenuMouseClicked(evt);
+            }
+        });
+        resultMenuBar.add(exitResultMenu);
+
         helpResultMenu.setText("Help");
+        helpResultMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                helpResultMenuMouseClicked(evt);
+            }
+        });
         resultMenuBar.add(helpResultMenu);
 
         result.setJMenuBar(resultMenuBar);
@@ -1057,13 +1146,26 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         getContentPane().add(mainPanel1);
-        mainPanel1.setBounds(202, 30, 396, 503);
+        mainPanel1.setBounds(202, 30, 396, 519);
 
         mainBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
         getContentPane().add(mainBackground);
         mainBackground.setBounds(0, 0, 800, 580);
 
+        exitMainMenu.setText("Exit");
+        exitMainMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitMainMenuMouseClicked(evt);
+            }
+        });
+        mainMenuBar.add(exitMainMenu);
+
         helpMainMenu.setText("Help");
+        helpMainMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                helpMainMenuMouseClicked(evt);
+            }
+        });
         mainMenuBar.add(helpMainMenu);
 
         setJMenuBar(mainMenuBar);
@@ -1076,19 +1178,73 @@ public class mainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_mainTextField1ActionPerformed
 
     private void mainButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainButton1ActionPerformed
-        try (BufferedReader reader = new BufferedReader(new FileReader("Lietotaji.txt"))) {
-            
-            } catch (IOException ex) {
-                
+        boolean found = false;
+        try (BufferedReader reader = new BufferedReader(new FileReader("lietotaji.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 5) 
+                    { 
+                        String savedtype = parts[0];
+                        String savedname = parts[1];
+                        String savedsurname = parts[2];
+                        String savedlogin = parts[3];
+                        String savedpassword = parts[4];
+                        
+                        if(savedlogin.equals(mainTextField1.getText().trim()) && savedpassword.equals(mainTextField2.getText().trim()))
+                        {
+                            found = true;
+                            
+                            type = savedtype;
+                            name = savedname;
+                            surname = savedsurname;
+                            login = savedlogin;
+                            password = savedpassword;
+                            
+                            if (type.equals("Skolēns")) 
+                            {
+                                user = new Student(name, surname, login, password);
+                            } else if (type.equals("Skolotājs"))
+                            {
+                                user = new Admin(name, surname, login, password);
+                            }
+                        }
+                    }
+                }
             }
-
-        setVisible(false);
-        studentTest.setSize(800,650);
-        studentTest.setLocationRelativeTo(null);
-        studentTest.setVisible(true);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Pārbaudiet ievadīto lietotājvārdu un paroli!", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        if(found == true)
+        {
+            if (user.enter(login, password) && type.equals("Skolēns")){
+            JOptionPane.showMessageDialog(null, "Veiksmīgs iekļūšana kā " + type + ": " + name + " " + surname, "Informācija", JOptionPane.INFORMATION_MESSAGE);
+            setVisible(false);
+            studentTest.setSize(800,650);
+            studentTest.setLocationRelativeTo(null);
+            studentTest.setVisible(true);
+            }
+            else if (user.enter(login, password) && type.equals("Skolotājs")){
+                JOptionPane.showMessageDialog(null, "Veiksmīgs iekļūšana kā " + type + ": " + name + " " + surname, "Informācija", JOptionPane.INFORMATION_MESSAGE);
+                setVisible(false);
+                teacherTest.setSize(800,650);
+                teacherTest.setLocationRelativeTo(null);
+                teacherTest.setVisible(true);
+            }
+            mainTextField1.setText("");
+            mainTextField2.setText("");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Pārbaudiet ievadīto lietotājvārdu un paroli!", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_mainButton1ActionPerformed
 
     private void mainButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainButton2ActionPerformed
+        mainTextField1.setText("");
+        mainTextField2.setText("");
         setVisible(false);
         registration.setSize(800,650);
         registration.setLocationRelativeTo(null);
@@ -1096,29 +1252,31 @@ public class mainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_mainButton2ActionPerformed
 
     private void registrationButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrationButton1ActionPerformed
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Lietotaji.txt", true))) {
-            if(registrationTextField4.getText().equals(registrationTextField5.getText()) && !"".equals(registrationTextField1.getText()) && !"".equals(registrationTextField2.getText()) && !"".equals(registrationTextField3.getText()) && !"".equals(registrationTextField4.getText()) && !"".equals(registrationTextField5.getText()))
+        name = registrationTextField1.getText().trim();
+        surname = registrationTextField2.getText().trim();
+        login = registrationTextField3.getText().trim();
+        password = registrationTextField4.getText().trim();
+        String confirmPassword = registrationTextField5.getText().trim();
+        if(registrationRadioButton1.isSelected())
+        {
+            type = "Skolēns";
+        }
+        if(registrationRadioButton2.isSelected())
+        {
+            type = "Skolotājs";
+        }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("lietotaji.txt", true))) {
+            if(
+                name.length() >= 3 && name.length() <= 20 &&
+                surname.length() >= 3 && surname.length() <= 20 &&
+                login.length() >= 3 && login.length() <= 20 &&
+                password.length() >= 6 && password.length() <= 20 && password.equals(confirmPassword) &&
+                !type.equals("")
+                )
             {
-                writer.write("Vārds: " + registrationTextField1.getText());
+                writer.write(type + "|" + name + "|" + surname + "|" + login + "|" + password);
                 writer.newLine();
-                writer.write("Uzvārds: " + registrationTextField2.getText());
-                writer.newLine();
-                writer.write("Lietotājvārds: " + registrationTextField3.getText());
-                writer.newLine();
-                writer.write("Parole: " + registrationTextField4.getText());
-                writer.newLine();
-                if(registrationRadioButton1.isSelected())
-                {
-                    writer.write("Lietotāja tips: " + "Skolēns");
-                    writer.newLine();
-                }
-                if(registrationRadioButton2.isSelected())
-                {
-                    writer.write("Lietotāja tips: " + "Skolotājs");
-                    writer.newLine();
-                }
-                writer.write("----------------------------");
-                writer.newLine();
+                
                 JOptionPane.showMessageDialog(null, "Lietotājs saglabāts!", "Informācija", JOptionPane.INFORMATION_MESSAGE);
                 
                 registrationTextField1.setText("");
@@ -1134,128 +1292,978 @@ public class mainWindow extends javax.swing.JFrame {
             else
             {
                 JOptionPane.showMessageDialog(null, "Nepareizi ievadīti dati!", "Kļuda", JOptionPane.ERROR_MESSAGE);
-                registrationTextField1.setText("");
-                registrationTextField2.setText("");
-                registrationTextField3.setText("");
-                registrationTextField4.setText("");
-                registrationTextField5.setText("");
-                registrationButtonGroup.clearSelection();
             }
-        } catch (IOException ex) {
+        } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Kļūda saglabājot datus!", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_registrationButton1ActionPerformed
 
     private void registrationButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrationButton2ActionPerformed
+        registrationTextField1.setText("");
+        registrationTextField2.setText("");
+        registrationTextField3.setText("");
+        registrationTextField4.setText("");
+        registrationTextField5.setText("");
+        registrationButtonGroup.clearSelection();
         registration.setVisible(false);
         setVisible(true);
     }//GEN-LAST:event_registrationButton2ActionPerformed
 
     private void question7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question7ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 7;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question7ActionPerformed
 
     private void question11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question11ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 11;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question11ActionPerformed
 
     private void studentStartTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentStartTestButtonActionPerformed
-        setVisible(false);
-        testQuestion.setSize(800,650);
-        testQuestion.setLocationRelativeTo(null);
-        testQuestion.setVisible(true);
+        if(work == true)
+        {
+            questionCount = 1;
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+                {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        String[] parts = line.split("\\|");
+                        if (parts.length == 6) 
+                        { 
+                            int savedquestionCount = Integer.parseInt(parts[0]);
+                            String savedtext = parts[1];
+                            String savedanswer[] = {parts[2], parts[3], parts[4]};
+                            int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+                            
+                            if(savedquestionCount == questionCount)
+                            {
+                                text = savedtext;
+                                answer[0] = savedanswer[0];
+                                answer[1] = savedanswer[1];
+                                answer[2] = savedanswer[2];
+                                correctAnswer = savedcorrectAnswer;
+                                question = new Question(text, answer, correctAnswer);
+
+                                questionLabel.setText(question.getText());
+                                questionRadioButton1.setText(answer[0]);
+                                questionRadioButton2.setText(answer[1]);
+                                questionRadioButton3.setText(answer[2]);
+                            }
+                        }
+                        else 
+                        {
+                            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+            studentTest.setVisible(false);
+            testQuestion.setSize(800,650);
+            testQuestion.setLocationRelativeTo(null);
+            testQuestion.setVisible(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Tests nav pieejams izpildei", "Informācija", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
     }//GEN-LAST:event_studentStartTestButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void studentExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentExitButtonActionPerformed
+        type = null;
+        name = null;
+        surname = null;
+        login = null;
+        password = null;
+        user = null;
+        studentTest.setVisible(false);
+        setVisible(true);
+    }//GEN-LAST:event_studentExitButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void teacherStartTestButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacherStartTestButton1ActionPerformed
+        if(work == true)
+        {
+            JOptionPane.showMessageDialog(null, "Tests jau ir pieejams izpildei", "Informācija", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else
+        {
+            int choice = JOptionPane.showConfirmDialog(null, "Dod iespēju veikt testu?","Apstiprinājums", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                work = true;
+                JOptionPane.showMessageDialog(null, "Tests ir pieejams izpildei.");
+            } else if (choice == JOptionPane.NO_OPTION) {
+                JOptionPane.showMessageDialog(null, "Tests nav pieejams izpildei.");
+            }
+        }
+        
+    }//GEN-LAST:event_teacherStartTestButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void teacherTestStatusButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacherTestStatusButton1ActionPerformed
+        if(work == true){
+            JOptionPane.showMessageDialog(null, "Tests ir pieejams izpildei!", "Informācija", JOptionPane.INFORMATION_MESSAGE);
+            int choice = JOptionPane.showConfirmDialog(null, "Pabeigt testu?","Apstiprinājums", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                work = false;
+                JOptionPane.showMessageDialog(null, "Tests ir pabeigts.");
+            } 
+        }
+        else 
+        {
+            JOptionPane.showMessageDialog(null, "Tests nav pieejams izpildei!", "Informācija", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_teacherTestStatusButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void teacherExtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacherExtButtonActionPerformed
+        type = null;
+        name = null;
+        surname = null;
+        login = null;
+        password = null;
+        user = null;
+        teacherTest.setVisible(false);
+        setVisible(true);
+    }//GEN-LAST:event_teacherExtButtonActionPerformed
 
     private void nextQuestionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextQuestionButtonActionPerformed
-        // TODO add your handling code here:
+        questionCount++;
+        if(questionCount <= 20)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+                {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        String[] parts = line.split("\n");
+                        if (parts.length == 6) 
+                        { 
+                            int savedquestionCount = Integer.parseInt(parts[0]);
+                            String savedtext = parts[1];
+                            String savedanswer[] = {parts[2], parts[3], parts[4]};
+                            int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+                            
+                            if(savedquestionCount == questionCount)
+                            {
+                                text = savedtext;
+                                answer[0] = savedanswer[0];
+                                answer[1] = savedanswer[1];
+                                answer[2] = savedanswer[2];
+                                correctAnswer = savedcorrectAnswer;
+                                question = new Question(text, answer, correctAnswer);
+
+                                questionLabel.setText(question.getText());
+                                questionRadioButton1.setText(answer[0]);
+                                questionRadioButton2.setText(answer[1]);
+                                questionRadioButton3.setText(answer[2]);
+                            }
+                        }
+                        else 
+                        {
+                            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else
+        {
+            int choice = JOptionPane.showConfirmDialog(null, "Pabeigt testu?","Apstiprinājums", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(null, "Tests ir pabeigts.");
+            } 
+        }
     }//GEN-LAST:event_nextQuestionButtonActionPerformed
 
     private void question1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question1ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 1;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question1ActionPerformed
 
     private void question2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question2ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 2;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question2ActionPerformed
 
     private void question3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question3ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 3;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question3ActionPerformed
 
     private void question4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question4ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 4;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question4ActionPerformed
 
     private void question5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question5ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 5;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question5ActionPerformed
 
     private void question6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question6ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 6;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question6ActionPerformed
 
     private void question8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question8ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 8;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question8ActionPerformed
 
     private void question9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question9ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 9;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question9ActionPerformed
 
     private void question10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question10ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 10;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question10ActionPerformed
 
     private void question12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question12ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 12;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question12ActionPerformed
 
     private void question13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question13ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 13;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question13ActionPerformed
 
     private void question14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question14ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 14;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question14ActionPerformed
 
     private void question15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question15ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 15;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question15ActionPerformed
 
     private void question16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question16ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 16;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question16ActionPerformed
 
     private void question17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question17ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 17;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question17ActionPerformed
 
     private void question18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question18ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 18;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question18ActionPerformed
 
     private void question19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question19ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 19;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question19ActionPerformed
 
     private void question20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question20ActionPerformed
-        // TODO add your handling code here:
+        questionCount = 20;
+        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+                            
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_question20ActionPerformed
 
     private void questionEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questionEndButtonActionPerformed
@@ -1269,6 +2277,54 @@ public class mainWindow extends javax.swing.JFrame {
     private void resultEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultEndButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_resultEndButtonActionPerformed
+
+    private void exitMainMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMainMenuMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_exitMainMenuMouseClicked
+
+    private void exitResultMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitResultMenuMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_exitResultMenuMouseClicked
+
+    private void exitTestMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTestMenuMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_exitTestMenuMouseClicked
+
+    private void exitTeacherTestMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTeacherTestMenuMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_exitTeacherTestMenuMouseClicked
+
+    private void exitStudentTestMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitStudentTestMenuMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_exitStudentTestMenuMouseClicked
+
+    private void exitRegistrationMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitRegistrationMenuMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_exitRegistrationMenuMouseClicked
+
+    private void helpMainMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpMainMenuMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_helpMainMenuMouseClicked
+
+    private void helpResultMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpResultMenuMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_helpResultMenuMouseClicked
+
+    private void helpTestMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpTestMenuMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_helpTestMenuMouseClicked
+
+    private void helpTeacherTestMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpTeacherTestMenuMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_helpTeacherTestMenuMouseClicked
+
+    private void helpStudentTestMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpStudentTestMenuMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_helpStudentTestMenuMouseClicked
+
+    private void helpRegistrationMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpRegistrationMenuMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_helpRegistrationMenuMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1306,16 +2362,18 @@ public class mainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu exitMainMenu;
+    private javax.swing.JMenu exitRegistrationMenu;
+    private javax.swing.JMenu exitResultMenu;
+    private javax.swing.JMenu exitStudentTestMenu;
+    private javax.swing.JMenu exitTeacherTestMenu;
+    private javax.swing.JMenu exitTestMenu;
     private javax.swing.JMenu helpMainMenu;
     private javax.swing.JMenu helpRegistrationMenu;
     private javax.swing.JMenu helpResultMenu;
     private javax.swing.JMenu helpStudentTestMenu;
     private javax.swing.JMenu helpTeacherTestMenu;
     private javax.swing.JMenu helpTestMenu;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel mainBackground;
     private javax.swing.JButton mainButton1;
@@ -1397,15 +2455,19 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel resultPanel;
     private javax.swing.JButton seeAnswerButton;
     private javax.swing.JLabel stidentTestLabel;
+    private javax.swing.JButton studentExitButton;
     private javax.swing.JButton studentStartTestButton;
     private javax.swing.JDialog studentTest;
     private javax.swing.JLabel studentTestBackground;
     private javax.swing.JMenuBar studentTestMenuBar;
     private javax.swing.JPanel studentTestPanel;
+    private javax.swing.JButton teacherExtButton;
+    private javax.swing.JButton teacherStartTestButton1;
     private javax.swing.JDialog teacherTest;
     private javax.swing.JLabel teacherTestBackground;
     private javax.swing.JMenuBar teacherTestMenuBar;
     private javax.swing.JPanel teacherTestPanel;
+    private javax.swing.JButton teacherTestStatusButton1;
     private javax.swing.JLabel testBackground;
     private javax.swing.JMenuBar testMenuBar;
     private javax.swing.JDialog testQuestion;

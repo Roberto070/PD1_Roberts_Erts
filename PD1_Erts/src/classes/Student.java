@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author Roberts Erts
  */
 public class Student extends User{
+    
     private ArrayList<Result> results = new ArrayList();
 
     public Student(String name, String surname, String login, String password) {
