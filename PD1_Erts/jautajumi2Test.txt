@@ -1,0 +1,20 @@
+1|1. Kāds ir Francijas galvaspilsētas nosaukums?|Parīze|Roma|Berlīne|0
+2|2. Kurā valstī atrodas Roma?|Francijā|Itālijā|Spānijā|1
+3|3. Kā sauc lielāko salu Eiropā?|Islande|Sicīlija|Lielbritānija|2
+4|4. Kurš okeāns atrodas pie Eiropas rietumu krasta?|Indijas okeāns|Atlantijas okeāns|Klusais okeāns|1
+5|5. Kā sauc slaveno torni Londonā?|Pizas tornis|Big Ben|Eifeļa tornis|1
+6|6. Kurā valstī atrodas Eifeļa tornis?|Vācijā|Itālijā|Francijā|2
+7|7. Kā sauc augstāko kalnu Eiropā?|Alpi|Everests|Elbruss|2
+8|8. Kurā valstī atrodas Madride?|Portugālē|Spānijā|Francijā|1
+9|9. Kāda ir oficiālā valoda Vācijā?|Franču|Vācu|Angļu|1
+10|10. Kurā Eiropas valstī ir visvairāk iedzīvotāju?|Itālijā|Francijā|Vācijā|2
+11|11. Kā sauc naudas vienību, kuru lieto daudzās Eiropas valstīs?|Dollars|Eiro|Mārciņa|1
+12|12. Kurā valstī atrodas pilsēta Amsterdama?|Beļģijā|Norvēģijā|Nīderlandē|2
+13|13. Kā sauc slaveno tiltu Budapeštā?|Londonas tilts|Ķēžu tilts|Zelta vārti|1
+14|14. Kurā valstī atrodas Atēnas?|Turcijā|Grieķijā|Itālijā|1
+15|15. Kā sauc galvaspilsētu Zviedrijā?|Kopenhāgena|Oslo|Stokholma|2
+16|16. Kur atrodas fjordi?|Spānijā|Norvēģijā|Polijā|1
+17|17. Kāds ir Portugāles galvaspilsētas nosaukums?|Porto|Lisabona|Madrid|1
+18|18. Kā sauc slaveno zvanu tornīti Pizā?|Big Ben|Eifeļa tornis|Pizas tornis|2
+19|19. Kurā valstī atrodas pilsēta Prāga?|Polijā|Čehijā|Ungārijā|1
+20|20. Kāds ir galvaspilsētas nosaukums Latvijā?|Liepāja|Daugavpils|Rīga|2

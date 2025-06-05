@@ -13,11 +13,30 @@ public class Result {
     
     private int questionsCount = 0;
     private int rightAnswer = 0;
+    private int percent = 0;
     
     public Result(DistanceExamenator test, int questionsCount, int rightAnswer){
         this.test = test;
         this.questionsCount = questionsCount;
         this.rightAnswer = rightAnswer;
+    }
+    
+    public int getPercent(int rightAnswer , int questionsCount){
+        this.percent = (int) ((rightAnswer / (double) questionsCount) * 100);
+        return percent;
+    }
+    
+    public int getGradeFromPercent(int percent) {
+        if (percent >= 95) return 10;
+        else if (percent >= 85) return 9;
+        else if (percent >= 75) return 8;
+        else if (percent >= 65) return 7;
+        else if (percent >= 55) return 6;
+        else if (percent >= 45) return 5;
+        else if (percent >= 35) return 4;
+        else if (percent >= 25) return 3;
+        else if (percent >= 15) return 2;
+        else return 1;
     }
     
     public DistanceExamenator getTest(){

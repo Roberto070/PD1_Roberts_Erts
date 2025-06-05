@@ -1,3 +1,0 @@
-Skolēns|Roberts|Erts|rerts|123123
-Skolotājs|Olegs|Nikitins|olegpiska|piska123
-Skolotājs|Janis|Gurkis|gurkis|345345

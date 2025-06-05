@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import classes.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -17,6 +19,11 @@ import classes.*;
  * @author Roberts Erts 
  */
 public class mainWindow extends javax.swing.JFrame {
+    boolean work1 = false;
+    boolean work2 = false;
+    boolean test1 = false;
+    boolean test2 = false;
+    
     String name = "";
     String surname = "";
     String login = "";
@@ -30,7 +37,22 @@ public class mainWindow extends javax.swing.JFrame {
     int correctAnswer = -1;
     Question question = new Question(text, answer, correctAnswer);
     
-    private boolean work;
+    int rightAnswersCount = 0;
+    int totalQuestions = 20;
+    
+    private List<Question> questions = new ArrayList<>();
+    DistanceExamenator test = new DistanceExamenator(work1, name, (ArrayList) questions);
+    
+    Result result = new Result(test, totalQuestions, rightAnswersCount);
+    String selectedAnswer = null;
+    int percent = 0;
+    int avgPercent = 0;
+    int average = 0;
+    int grade = 0;
+    
+    String[] selectedAnswers = new String[20];
+    String[] correctAnswers = new String[20];
+    String[] results = new String[20]; // "Pareizi" vai "Nepareizi"
     /**
      * Creates new form mainWindow
      */
@@ -74,26 +96,30 @@ public class mainWindow extends javax.swing.JFrame {
         registrationButtonGroup = new javax.swing.ButtonGroup();
         studentTest = new javax.swing.JDialog();
         studentTestPanel = new javax.swing.JPanel();
-        stidentTestLabel = new javax.swing.JLabel();
-        studentStartTestButton = new javax.swing.JButton();
+        studentTestLabel1 = new javax.swing.JLabel();
+        studentStartTestButton1 = new javax.swing.JButton();
         studentExitButton = new javax.swing.JButton();
+        studentTestLabel2 = new javax.swing.JLabel();
+        studentStartTestButton2 = new javax.swing.JButton();
         studentTestBackground = new javax.swing.JLabel();
         studentTestMenuBar = new javax.swing.JMenuBar();
         exitStudentTestMenu = new javax.swing.JMenu();
-        helpStudentTestMenu = new javax.swing.JMenu();
         teacherTest = new javax.swing.JDialog();
-        teacherTestPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        teacherTestPanel1 = new javax.swing.JPanel();
+        teacherTestLabel1 = new javax.swing.JLabel();
         teacherStartTestButton1 = new javax.swing.JButton();
         teacherExtButton = new javax.swing.JButton();
         teacherTestStatusButton1 = new javax.swing.JButton();
+        teacherTestLabel2 = new javax.swing.JLabel();
+        teacherStartTestButton2 = new javax.swing.JButton();
+        teacherTestStatusButton2 = new javax.swing.JButton();
         teacherTestBackground = new javax.swing.JLabel();
         teacherTestMenuBar = new javax.swing.JMenuBar();
         exitTeacherTestMenu = new javax.swing.JMenu();
-        helpTeacherTestMenu = new javax.swing.JMenu();
         testQuestion = new javax.swing.JDialog();
         questionPanel2 = new javax.swing.JPanel();
         qLabel = new javax.swing.JLabel();
+        questionEndButton = new javax.swing.JButton();
         question1 = new javax.swing.JButton();
         question2 = new javax.swing.JButton();
         question3 = new javax.swing.JButton();
@@ -114,7 +140,6 @@ public class mainWindow extends javax.swing.JFrame {
         question18 = new javax.swing.JButton();
         question19 = new javax.swing.JButton();
         question20 = new javax.swing.JButton();
-        questionEndButton = new javax.swing.JButton();
         questionPanel1 = new javax.swing.JPanel();
         questionLabel = new javax.swing.JLabel();
         questionRadioButton1 = new javax.swing.JRadioButton();
@@ -124,9 +149,8 @@ public class mainWindow extends javax.swing.JFrame {
         testBackground = new javax.swing.JLabel();
         testMenuBar = new javax.swing.JMenuBar();
         exitTestMenu = new javax.swing.JMenu();
-        helpTestMenu = new javax.swing.JMenu();
         questionButtonGroup = new javax.swing.ButtonGroup();
-        result = new javax.swing.JDialog();
+        testResult = new javax.swing.JDialog();
         resultPanel = new javax.swing.JPanel();
         resultLabel1 = new javax.swing.JLabel();
         resultLabel2 = new javax.swing.JLabel();
@@ -137,10 +161,51 @@ public class mainWindow extends javax.swing.JFrame {
         markLabel2 = new javax.swing.JLabel();
         seeAnswerButton = new javax.swing.JButton();
         resultEndButton = new javax.swing.JButton();
+        resultComentLabel = new javax.swing.JLabel();
         resultBackground = new javax.swing.JLabel();
         resultMenuBar = new javax.swing.JMenuBar();
         exitResultMenu = new javax.swing.JMenu();
-        helpResultMenu = new javax.swing.JMenu();
+        testAnswer = new javax.swing.JDialog();
+        testAnswerPanel = new javax.swing.JPanel();
+        testAnswerLabel = new javax.swing.JLabel();
+        testAnswerButton = new javax.swing.JButton();
+        testAnswerScrollPane = new javax.swing.JScrollPane();
+        testAnswerOutput = new javax.swing.JTextArea();
+        testAnswerBackground = new javax.swing.JLabel();
+        helpRegistration = new javax.swing.JDialog();
+        helpRegistartionPanel1 = new javax.swing.JPanel();
+        helpRegistartionLabel1 = new javax.swing.JLabel();
+        helpRegistrationPanel2 = new javax.swing.JPanel();
+        helpRegistrationLabel1 = new javax.swing.JLabel();
+        helpRegistrationLabel2 = new javax.swing.JLabel();
+        helpRegistrationLabel3 = new javax.swing.JLabel();
+        helpRegistrationLabel4 = new javax.swing.JLabel();
+        helpRegistrationLabel5 = new javax.swing.JLabel();
+        helpRegistrationLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        helpRegistrationButton = new javax.swing.JButton();
+        helpRegistartionBackground = new javax.swing.JLabel();
+        helpLogin = new javax.swing.JDialog();
+        helpLoginPanel1 = new javax.swing.JPanel();
+        helpLoginLabel1 = new javax.swing.JLabel();
+        helpLoginPanel2 = new javax.swing.JPanel();
+        helpLoginLabel2 = new javax.swing.JLabel();
+        helpLoginLabel3 = new javax.swing.JLabel();
+        helpLoginLabel4 = new javax.swing.JLabel();
+        helpLoginLabel5 = new javax.swing.JLabel();
+        helpLoginButton = new javax.swing.JButton();
+        helpRegistartionBackground1 = new javax.swing.JLabel();
+        helpRegistration2 = new javax.swing.JDialog();
+        helpRegistartionPanel3 = new javax.swing.JPanel();
+        helpRegistartionLabel3 = new javax.swing.JLabel();
+        helpRegistrationPanel4 = new javax.swing.JPanel();
+        helpRegistrationLabel13 = new javax.swing.JLabel();
+        helpRegistrationLabel14 = new javax.swing.JLabel();
+        helpRegistrationLabel15 = new javax.swing.JLabel();
+        helpRegistrationLabel16 = new javax.swing.JLabel();
+        helpRegistrationLabel17 = new javax.swing.JLabel();
+        helpRegistrationLabel18 = new javax.swing.JLabel();
+        helpRegistartionBackground2 = new javax.swing.JLabel();
         mainPanel1 = new javax.swing.JPanel();
         mainPanel2 = new javax.swing.JPanel();
         mainLabel2_1 = new javax.swing.JLabel();
@@ -161,8 +226,7 @@ public class mainWindow extends javax.swing.JFrame {
         registration.setTitle("Test");
         registration.setMinimumSize(new java.awt.Dimension(800, 630));
         registration.setModal(true);
-        registration.setPreferredSize(new java.awt.Dimension(800, 600));
-        registration.getContentPane().setLayout(null);
+        registration.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         registrationPanel.setBackground(new java.awt.Color(255, 255, 255));
         registrationPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -303,12 +367,10 @@ public class mainWindow extends javax.swing.JFrame {
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
-        registration.getContentPane().add(registrationPanel);
-        registrationPanel.setBounds(122, 48, 556, 504);
+        registration.getContentPane().add(registrationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
 
         registrationBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
-        registration.getContentPane().add(registrationBackground);
-        registrationBackground.setBounds(0, 0, 800, 600);
+        registration.getContentPane().add(registrationBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         exitRegistrationMenu.setText("Exit");
         exitRegistrationMenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -331,20 +393,19 @@ public class mainWindow extends javax.swing.JFrame {
         studentTest.setTitle("Test");
         studentTest.setMinimumSize(new java.awt.Dimension(800, 630));
         studentTest.setModal(true);
-        studentTest.setPreferredSize(new java.awt.Dimension(800, 600));
-        studentTest.getContentPane().setLayout(null);
+        studentTest.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         studentTestPanel.setBackground(new java.awt.Color(255, 255, 255));
         studentTestPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        stidentTestLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        stidentTestLabel.setText("Tests “Latvija”");
+        studentTestLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        studentTestLabel1.setText("Tests “Latvija”");
 
-        studentStartTestButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        studentStartTestButton.setText("Sakt testu");
-        studentStartTestButton.addActionListener(new java.awt.event.ActionListener() {
+        studentStartTestButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        studentStartTestButton1.setText("Sakt testu");
+        studentStartTestButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                studentStartTestButtonActionPerformed(evt);
+                studentStartTestButton1ActionPerformed(evt);
             }
         });
 
@@ -356,41 +417,58 @@ public class mainWindow extends javax.swing.JFrame {
             }
         });
 
+        studentTestLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        studentTestLabel2.setText("Tests “Eiropa”");
+
+        studentStartTestButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        studentStartTestButton2.setText("Sakt testu");
+        studentStartTestButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                studentStartTestButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout studentTestPanelLayout = new javax.swing.GroupLayout(studentTestPanel);
         studentTestPanel.setLayout(studentTestPanelLayout);
         studentTestPanelLayout.setHorizontalGroup(
             studentTestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(studentTestPanelLayout.createSequentialGroup()
-                .addGroup(studentTestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(studentTestPanelLayout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(studentStartTestButton))
-                    .addGroup(studentTestPanelLayout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(studentExitButton))
-                    .addGroup(studentTestPanelLayout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(stidentTestLabel)))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addGap(104, 104, 104)
+                .addComponent(studentStartTestButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(studentStartTestButton2)
+                .addGap(104, 104, 104))
+            .addGroup(studentTestPanelLayout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(studentTestLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+                .addComponent(studentTestLabel2)
+                .addGap(79, 79, 79))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, studentTestPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(studentExitButton)
+                .addGap(246, 246, 246))
         );
         studentTestPanelLayout.setVerticalGroup(
             studentTestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(studentTestPanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(stidentTestLabel)
+                .addGroup(studentTestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(studentTestLabel1)
+                    .addComponent(studentTestLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(studentStartTestButton)
+                .addGroup(studentTestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(studentStartTestButton1)
+                    .addComponent(studentStartTestButton2))
                 .addGap(18, 18, 18)
                 .addComponent(studentExitButton)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        studentTest.getContentPane().add(studentTestPanel);
-        studentTestPanel.setBounds(236, 200, 327, 198);
+        studentTest.getContentPane().add(studentTestPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
 
         studentTestBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
-        studentTest.getContentPane().add(studentTestBackground);
-        studentTestBackground.setBounds(0, 0, 800, 600);
+        studentTest.getContentPane().add(studentTestBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         exitStudentTestMenu.setText("Exit");
         exitStudentTestMenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -400,27 +478,18 @@ public class mainWindow extends javax.swing.JFrame {
         });
         studentTestMenuBar.add(exitStudentTestMenu);
 
-        helpStudentTestMenu.setText("Help");
-        helpStudentTestMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                helpStudentTestMenuMouseClicked(evt);
-            }
-        });
-        studentTestMenuBar.add(helpStudentTestMenu);
-
         studentTest.setJMenuBar(studentTestMenuBar);
 
         teacherTest.setTitle("Test");
         teacherTest.setMinimumSize(new java.awt.Dimension(800, 630));
         teacherTest.setModal(true);
-        teacherTest.setPreferredSize(new java.awt.Dimension(800, 600));
-        teacherTest.getContentPane().setLayout(null);
+        teacherTest.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        teacherTestPanel.setBackground(new java.awt.Color(255, 255, 255));
-        teacherTestPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        teacherTestPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        teacherTestPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Tests “Latvija”");
+        teacherTestLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        teacherTestLabel1.setText("Tests “Latvija”");
 
         teacherStartTestButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         teacherStartTestButton1.setText("Sakt testu");
@@ -446,46 +515,81 @@ public class mainWindow extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout teacherTestPanelLayout = new javax.swing.GroupLayout(teacherTestPanel);
-        teacherTestPanel.setLayout(teacherTestPanelLayout);
-        teacherTestPanelLayout.setHorizontalGroup(
-            teacherTestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(teacherTestPanelLayout.createSequentialGroup()
-                .addGroup(teacherTestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(teacherTestPanelLayout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(teacherExtButton))
-                    .addGroup(teacherTestPanelLayout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(teacherStartTestButton1))
-                    .addGroup(teacherTestPanelLayout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(teacherTestStatusButton1))
-                    .addGroup(teacherTestPanelLayout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(jLabel1)))
-                .addContainerGap(72, Short.MAX_VALUE))
-        );
-        teacherTestPanelLayout.setVerticalGroup(
-            teacherTestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(teacherTestPanelLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        teacherTestLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        teacherTestLabel2.setText("Tests “Eiropa”");
+        teacherTestLabel2.setToolTipText("");
+
+        teacherStartTestButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        teacherStartTestButton2.setText("Sakt testu");
+        teacherStartTestButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                teacherStartTestButton2ActionPerformed(evt);
+            }
+        });
+
+        teacherTestStatusButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        teacherTestStatusButton2.setText("Testa statuss");
+        teacherTestStatusButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                teacherTestStatusButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout teacherTestPanel1Layout = new javax.swing.GroupLayout(teacherTestPanel1);
+        teacherTestPanel1.setLayout(teacherTestPanel1Layout);
+        teacherTestPanel1Layout.setHorizontalGroup(
+            teacherTestPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teacherTestPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(teacherExtButton)
+                .addGap(229, 229, 229))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teacherTestPanel1Layout.createSequentialGroup()
+                .addGap(103, 103, 103)
                 .addComponent(teacherStartTestButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(teacherStartTestButton2)
+                .addGap(99, 99, 99))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teacherTestPanel1Layout.createSequentialGroup()
+                .addGroup(teacherTestPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(teacherTestPanel1Layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(teacherTestLabel1))
+                    .addGroup(teacherTestPanel1Layout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addComponent(teacherTestStatusButton1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                .addGroup(teacherTestPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teacherTestPanel1Layout.createSequentialGroup()
+                        .addComponent(teacherTestLabel2)
+                        .addGap(77, 77, 77))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teacherTestPanel1Layout.createSequentialGroup()
+                        .addComponent(teacherTestStatusButton2)
+                        .addGap(90, 90, 90))))
+        );
+        teacherTestPanel1Layout.setVerticalGroup(
+            teacherTestPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(teacherTestPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(teacherTestPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(teacherTestLabel1)
+                    .addComponent(teacherTestLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(teacherTestPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(teacherStartTestButton1)
+                    .addComponent(teacherStartTestButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(teacherTestStatusButton1)
+                .addGroup(teacherTestPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(teacherTestStatusButton1)
+                    .addComponent(teacherTestStatusButton2))
                 .addGap(18, 18, 18)
                 .addComponent(teacherExtButton)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        teacherTest.getContentPane().add(teacherTestPanel);
-        teacherTestPanel.setBounds(237, 185, 327, 230);
+        teacherTest.getContentPane().add(teacherTestPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
 
         teacherTestBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
-        teacherTest.getContentPane().add(teacherTestBackground);
-        teacherTestBackground.setBounds(0, 0, 800, 600);
+        teacherTest.getContentPane().add(teacherTestBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         exitTeacherTestMenu.setText("Exit");
         exitTeacherTestMenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -495,28 +599,26 @@ public class mainWindow extends javax.swing.JFrame {
         });
         teacherTestMenuBar.add(exitTeacherTestMenu);
 
-        helpTeacherTestMenu.setText("Help");
-        helpTeacherTestMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                helpTeacherTestMenuMouseClicked(evt);
-            }
-        });
-        teacherTestMenuBar.add(helpTeacherTestMenu);
-
         teacherTest.setJMenuBar(teacherTestMenuBar);
 
         testQuestion.setTitle("Test");
-        testQuestion.setMaximumSize(new java.awt.Dimension(800, 650));
         testQuestion.setMinimumSize(new java.awt.Dimension(800, 630));
         testQuestion.setModal(true);
-        testQuestion.setPreferredSize(new java.awt.Dimension(800, 600));
-        testQuestion.getContentPane().setLayout(null);
+        testQuestion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         questionPanel2.setBackground(new java.awt.Color(255, 255, 255));
         questionPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         qLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         qLabel.setText("Jautajumi :");
+
+        questionEndButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        questionEndButton.setText("Pabeigt darbu");
+        questionEndButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                questionEndButtonActionPerformed(evt);
+            }
+        });
 
         question1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         question1.setText("1");
@@ -678,14 +780,6 @@ public class mainWindow extends javax.swing.JFrame {
             }
         });
 
-        questionEndButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        questionEndButton.setText("Pabeigt darbu");
-        questionEndButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                questionEndButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout questionPanel2Layout = new javax.swing.GroupLayout(questionPanel2);
         questionPanel2.setLayout(questionPanel2Layout);
         questionPanel2Layout.setHorizontalGroup(
@@ -790,12 +884,11 @@ public class mainWindow extends javax.swing.JFrame {
                     .addComponent(question19)
                     .addComponent(question20))
                 .addGap(18, 18, 18)
-                .addComponent(questionEndButton)
-                .addGap(30, 30, 30))
+                .addComponent(questionEndButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        testQuestion.getContentPane().add(questionPanel2);
-        questionPanel2.setBounds(610, 20, 166, 548);
+        testQuestion.getContentPane().add(questionPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, -1));
 
         questionPanel1.setBackground(new java.awt.Color(255, 255, 255));
         questionPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -857,12 +950,10 @@ public class mainWindow extends javax.swing.JFrame {
                 .addGap(30, 30, 30))
         );
 
-        testQuestion.getContentPane().add(questionPanel1);
-        questionPanel1.setBounds(25, 120, 566, 369);
+        testQuestion.getContentPane().add(questionPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 120, -1, -1));
 
         testBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
-        testQuestion.getContentPane().add(testBackground);
-        testBackground.setBounds(0, 0, 800, 600);
+        testQuestion.getContentPane().add(testBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         exitTestMenu.setText("Exit");
         exitTestMenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -872,20 +963,12 @@ public class mainWindow extends javax.swing.JFrame {
         });
         testMenuBar.add(exitTestMenu);
 
-        helpTestMenu.setText("Help");
-        helpTestMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                helpTestMenuMouseClicked(evt);
-            }
-        });
-        testMenuBar.add(helpTestMenu);
-
         testQuestion.setJMenuBar(testMenuBar);
 
-        result.setTitle("Test");
-        result.setMinimumSize(new java.awt.Dimension(800, 630));
-        result.setModal(true);
-        result.getContentPane().setLayout(null);
+        testResult.setTitle("Test");
+        testResult.setMinimumSize(new java.awt.Dimension(800, 630));
+        testResult.setModal(true);
+        testResult.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         resultPanel.setBackground(new java.awt.Color(255, 255, 255));
         resultPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -927,6 +1010,9 @@ public class mainWindow extends javax.swing.JFrame {
             }
         });
 
+        resultComentLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        resultComentLabel.setText("Komentarijs");
+
         javax.swing.GroupLayout resultPanelLayout = new javax.swing.GroupLayout(resultPanel);
         resultPanel.setLayout(resultPanelLayout);
         resultPanelLayout.setHorizontalGroup(
@@ -935,33 +1021,33 @@ public class mainWindow extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(resultLabel1)
                 .addGap(139, 139, 139))
+            .addGroup(resultPanelLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(resultLabel2)
+                    .addGroup(resultPanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(markLabel1)
+                            .addComponent(percentageLabel1))))
+                .addGap(40, 40, 40)
+                .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(resultLabel3)
+                    .addGroup(resultPanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(markLabel2)
+                            .addComponent(percentageLabel2))))
+                .addContainerGap(50, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(resultEndButton)
-                .addContainerGap())
-            .addGroup(resultPanelLayout.createSequentialGroup()
                 .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(resultComentLabel)
                     .addGroup(resultPanelLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(resultLabel2)
-                            .addGroup(resultPanelLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(markLabel1)
-                                    .addComponent(percentageLabel1))))
-                        .addGap(40, 40, 40)
-                        .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(resultLabel3)
-                            .addGroup(resultPanelLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(markLabel2)
-                                    .addComponent(percentageLabel2)))))
-                    .addGroup(resultPanelLayout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(seeAnswerButton)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                        .addComponent(seeAnswerButton)
+                        .addGap(27, 27, 27)
+                        .addComponent(resultEndButton)))
+                .addContainerGap())
         );
         resultPanelLayout.setVerticalGroup(
             resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -980,19 +1066,23 @@ public class mainWindow extends javax.swing.JFrame {
                 .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(markLabel1)
                     .addComponent(markLabel2))
-                .addGap(18, 18, 18)
-                .addComponent(seeAnswerButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(resultEndButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(resultPanelLayout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(resultEndButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(resultComentLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(seeAnswerButton)
+                        .addGap(32, 32, 32))))
         );
 
-        result.getContentPane().add(resultPanel);
-        resultPanel.setBounds(213, 146, 382, 277);
+        testResult.getContentPane().add(resultPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, -1, -1));
 
         resultBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
-        result.getContentPane().add(resultBackground);
-        resultBackground.setBounds(0, 0, 800, 600);
+        testResult.getContentPane().add(resultBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         exitResultMenu.setText("Exit");
         exitResultMenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1002,21 +1092,374 @@ public class mainWindow extends javax.swing.JFrame {
         });
         resultMenuBar.add(exitResultMenu);
 
-        helpResultMenu.setText("Help");
-        helpResultMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                helpResultMenuMouseClicked(evt);
+        testResult.setJMenuBar(resultMenuBar);
+
+        testAnswer.setTitle("Test");
+        testAnswer.setMaximumSize(new java.awt.Dimension(800, 650));
+        testAnswer.setMinimumSize(new java.awt.Dimension(800, 630));
+        testAnswer.setModal(true);
+        testAnswer.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        testAnswerPanel.setBackground(new java.awt.Color(255, 255, 255));
+        testAnswerPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        testAnswerPanel.setPreferredSize(new java.awt.Dimension(700, 500));
+
+        testAnswerLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        testAnswerLabel.setText("Jūsu atbildes");
+
+        testAnswerButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        testAnswerButton.setText("Labi");
+        testAnswerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                testAnswerButtonActionPerformed(evt);
             }
         });
-        resultMenuBar.add(helpResultMenu);
 
-        result.setJMenuBar(resultMenuBar);
+        testAnswerScrollPane.setPreferredSize(new java.awt.Dimension(236, 90));
+
+        testAnswerOutput.setEditable(false);
+        testAnswerOutput.setColumns(20);
+        testAnswerOutput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        testAnswerOutput.setRows(5);
+        testAnswerScrollPane.setViewportView(testAnswerOutput);
+
+        javax.swing.GroupLayout testAnswerPanelLayout = new javax.swing.GroupLayout(testAnswerPanel);
+        testAnswerPanel.setLayout(testAnswerPanelLayout);
+        testAnswerPanelLayout.setHorizontalGroup(
+            testAnswerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, testAnswerPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(testAnswerButton)
+                .addGap(309, 309, 309))
+            .addGroup(testAnswerPanelLayout.createSequentialGroup()
+                .addGroup(testAnswerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(testAnswerPanelLayout.createSequentialGroup()
+                        .addGap(279, 279, 279)
+                        .addComponent(testAnswerLabel))
+                    .addGroup(testAnswerPanelLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(testAnswerScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        testAnswerPanelLayout.setVerticalGroup(
+            testAnswerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(testAnswerPanelLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(testAnswerLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(testAnswerScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(testAnswerButton)
+                .addGap(30, 30, 30))
+        );
+
+        testAnswer.getContentPane().add(testAnswerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+
+        testAnswerBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
+        testAnswer.getContentPane().add(testAnswerBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        helpRegistration.setTitle("Help");
+        helpRegistration.setMaximumSize(new java.awt.Dimension(800, 600));
+        helpRegistration.setMinimumSize(new java.awt.Dimension(800, 600));
+        helpRegistration.setModal(true);
+        helpRegistration.setPreferredSize(new java.awt.Dimension(800, 600));
+        helpRegistration.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        helpRegistartionPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        helpRegistartionPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        helpRegistartionLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        helpRegistartionLabel1.setText("Reģistrācijas palīdzība");
+        helpRegistartionLabel1.setToolTipText("");
+
+        javax.swing.GroupLayout helpRegistartionPanel1Layout = new javax.swing.GroupLayout(helpRegistartionPanel1);
+        helpRegistartionPanel1.setLayout(helpRegistartionPanel1Layout);
+        helpRegistartionPanel1Layout.setHorizontalGroup(
+            helpRegistartionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(helpRegistartionPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(helpRegistartionLabel1)
+                .addGap(30, 30, 30))
+        );
+        helpRegistartionPanel1Layout.setVerticalGroup(
+            helpRegistartionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(helpRegistartionPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(helpRegistartionLabel1)
+                .addGap(30, 30, 30))
+        );
+
+        helpRegistration.getContentPane().add(helpRegistartionPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 320, 90));
+
+        helpRegistrationPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        helpRegistrationPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        helpRegistrationLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        helpRegistrationLabel1.setText("Ja jums nav konta, jums ir jāreģistrējas, ievadot datus tukšajos laukos:");
+
+        helpRegistrationLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        helpRegistrationLabel2.setText("Vārds: ievadiet savu vārdu (no 3 līdz  20 simboliem)");
+
+        helpRegistrationLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        helpRegistrationLabel3.setText("Uzvārds: ievadiet savu uzvārdu (no 3 līdz  20 simboliem)");
+
+        helpRegistrationLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        helpRegistrationLabel4.setText("Lietotārdu: ievadiet savu lietotārdu (no 3 līdz  20 simboliem)");
+
+        helpRegistrationLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        helpRegistrationLabel5.setText("Parole: ievadiet savu parole (no 6 līdz  20 simboliem)");
+
+        helpRegistrationLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        helpRegistrationLabel6.setText("Izvēlieties konta veidu!");
+        helpRegistrationLabel6.setToolTipText("");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("Nospiet uz pogu \"Reģistreties\"");
+
+        helpRegistrationButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        helpRegistrationButton.setText("Labi");
+        helpRegistrationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                helpRegistrationButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout helpRegistrationPanel2Layout = new javax.swing.GroupLayout(helpRegistrationPanel2);
+        helpRegistrationPanel2.setLayout(helpRegistrationPanel2Layout);
+        helpRegistrationPanel2Layout.setHorizontalGroup(
+            helpRegistrationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(helpRegistrationPanel2Layout.createSequentialGroup()
+                .addGroup(helpRegistrationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(helpRegistrationPanel2Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(helpRegistrationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(helpRegistrationLabel6)
+                            .addComponent(helpRegistrationLabel5)
+                            .addComponent(helpRegistrationLabel4)
+                            .addComponent(helpRegistrationLabel3)
+                            .addComponent(helpRegistrationLabel2)
+                            .addComponent(helpRegistrationLabel1)))
+                    .addGroup(helpRegistrationPanel2Layout.createSequentialGroup()
+                        .addGap(277, 277, 277)
+                        .addComponent(helpRegistrationButton)))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+        helpRegistrationPanel2Layout.setVerticalGroup(
+            helpRegistrationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(helpRegistrationPanel2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(helpRegistrationLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(helpRegistrationLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(helpRegistrationLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(helpRegistrationLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(helpRegistrationLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(helpRegistrationLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(helpRegistrationButton)
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
+
+        helpRegistration.getContentPane().add(helpRegistrationPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 640, 340));
+
+        helpRegistartionBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
+        helpRegistration.getContentPane().add(helpRegistartionBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
+
+        helpLogin.setTitle("Help");
+        helpLogin.setMaximumSize(new java.awt.Dimension(800, 600));
+        helpLogin.setModal(true);
+        helpLogin.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        helpLoginPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        helpLoginPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        helpLoginLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        helpLoginLabel1.setText("Ielagošāna palīdzība");
+        helpLoginLabel1.setToolTipText("");
+
+        javax.swing.GroupLayout helpLoginPanel1Layout = new javax.swing.GroupLayout(helpLoginPanel1);
+        helpLoginPanel1.setLayout(helpLoginPanel1Layout);
+        helpLoginPanel1Layout.setHorizontalGroup(
+            helpLoginPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(helpLoginPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(helpLoginLabel1)
+                .addGap(30, 30, 30))
+        );
+        helpLoginPanel1Layout.setVerticalGroup(
+            helpLoginPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(helpLoginPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(helpLoginLabel1)
+                .addGap(30, 30, 30))
+        );
+
+        helpLogin.getContentPane().add(helpLoginPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 320, 90));
+
+        helpLoginPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        helpLoginPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        helpLoginLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        helpLoginLabel2.setText("Ja jums ir konts, jums ir jāielagoties, ievadot datus tukšajos laukos:");
+
+        helpLoginLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        helpLoginLabel3.setText("Lietotārdu: ievadiet savu lietotārdu ");
+
+        helpLoginLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        helpLoginLabel4.setText("Parole: ievadiet savu parole ");
+
+        helpLoginLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        helpLoginLabel5.setText("Nospiet uz pogu \"Ielogoties\"");
+        helpLoginLabel5.setToolTipText("");
+
+        helpLoginButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        helpLoginButton.setText("Labi");
+        helpLoginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                helpLoginButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout helpLoginPanel2Layout = new javax.swing.GroupLayout(helpLoginPanel2);
+        helpLoginPanel2.setLayout(helpLoginPanel2Layout);
+        helpLoginPanel2Layout.setHorizontalGroup(
+            helpLoginPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(helpLoginPanel2Layout.createSequentialGroup()
+                .addGroup(helpLoginPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(helpLoginPanel2Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(helpLoginPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(helpLoginLabel5)
+                            .addComponent(helpLoginLabel4)
+                            .addComponent(helpLoginLabel3)
+                            .addComponent(helpLoginLabel2)))
+                    .addGroup(helpLoginPanel2Layout.createSequentialGroup()
+                        .addGap(277, 277, 277)
+                        .addComponent(helpLoginButton)))
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+        helpLoginPanel2Layout.setVerticalGroup(
+            helpLoginPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(helpLoginPanel2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(helpLoginLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(helpLoginLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(helpLoginLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(helpLoginLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(helpLoginButton)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        helpLogin.getContentPane().add(helpLoginPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 640, 220));
+
+        helpRegistartionBackground1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
+        helpLogin.getContentPane().add(helpRegistartionBackground1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
+
+        helpRegistration2.setTitle("Help");
+        helpRegistration2.setMaximumSize(new java.awt.Dimension(800, 600));
+        helpRegistration2.setModal(true);
+        helpRegistration2.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        helpRegistartionPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        helpRegistartionPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        helpRegistartionLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        helpRegistartionLabel3.setText("Reģistrācijas palīdzība");
+        helpRegistartionLabel3.setToolTipText("");
+
+        javax.swing.GroupLayout helpRegistartionPanel3Layout = new javax.swing.GroupLayout(helpRegistartionPanel3);
+        helpRegistartionPanel3.setLayout(helpRegistartionPanel3Layout);
+        helpRegistartionPanel3Layout.setHorizontalGroup(
+            helpRegistartionPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(helpRegistartionPanel3Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(helpRegistartionLabel3)
+                .addGap(30, 30, 30))
+        );
+        helpRegistartionPanel3Layout.setVerticalGroup(
+            helpRegistartionPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(helpRegistartionPanel3Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(helpRegistartionLabel3)
+                .addGap(30, 30, 30))
+        );
+
+        helpRegistration2.getContentPane().add(helpRegistartionPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 320, 90));
+
+        helpRegistrationPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        helpRegistrationPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        helpRegistrationLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        helpRegistrationLabel13.setText("Ja jums nav konta, jums ir jāreģistrējas, ievadot datus tukšajos laukos:");
+
+        helpRegistrationLabel14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        helpRegistrationLabel14.setText("Vārds: ievadiet savu vārdu (no 3 līdz  20 simboliem)");
+
+        helpRegistrationLabel15.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        helpRegistrationLabel15.setText("Uzvārds: ievadiet savu uzvārdu (no 3 līdz  20 simboliem)");
+
+        helpRegistrationLabel16.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        helpRegistrationLabel16.setText("Lietotārdu: ievadiet savu lietotārdu (no 3 līdz  20 simboliem)");
+
+        helpRegistrationLabel17.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        helpRegistrationLabel17.setText("Parole: ievadiet savu parole (no 6 līdz  20 simboliem)");
+
+        helpRegistrationLabel18.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        helpRegistrationLabel18.setText("Izvēlieties konta veidu!");
+        helpRegistrationLabel18.setToolTipText("");
+
+        javax.swing.GroupLayout helpRegistrationPanel4Layout = new javax.swing.GroupLayout(helpRegistrationPanel4);
+        helpRegistrationPanel4.setLayout(helpRegistrationPanel4Layout);
+        helpRegistrationPanel4Layout.setHorizontalGroup(
+            helpRegistrationPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(helpRegistrationPanel4Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(helpRegistrationPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(helpRegistrationLabel18)
+                    .addComponent(helpRegistrationLabel17)
+                    .addComponent(helpRegistrationLabel16)
+                    .addComponent(helpRegistrationLabel15)
+                    .addComponent(helpRegistrationLabel14)
+                    .addComponent(helpRegistrationLabel13))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+        helpRegistrationPanel4Layout.setVerticalGroup(
+            helpRegistrationPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(helpRegistrationPanel4Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(helpRegistrationLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(helpRegistrationLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(helpRegistrationLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(helpRegistrationLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(helpRegistrationLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(helpRegistrationLabel18)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        helpRegistration2.getContentPane().add(helpRegistrationPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 640, 260));
+
+        helpRegistartionBackground2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/background2.png"))); // NOI18N
+        helpRegistration2.getContentPane().add(helpRegistartionBackground2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Test");
-        setMaximumSize(new java.awt.Dimension(800, 650));
         setMinimumSize(new java.awt.Dimension(800, 630));
-        setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(null);
 
         mainPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -1310,12 +1753,29 @@ public class mainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_registrationButton2ActionPerformed
 
     private void question7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question7ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 7;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -1331,31 +1791,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question7ActionPerformed
 
     private void question11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question11ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 11;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -1371,29 +1877,61 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question11ActionPerformed
 
-    private void studentStartTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentStartTestButtonActionPerformed
-        if(work == true)
+    private void studentStartTestButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentStartTestButton1ActionPerformed
+        if(work1 == true)
         {
+            test1 = true;
+            test2 = false;
+            questionButtonGroup.clearSelection();
             questionCount = 1;
-            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 {
                     String line;
                     while ((line = reader.readLine()) != null) {
@@ -1420,10 +1958,6 @@ public class mainWindow extends javax.swing.JFrame {
                                 questionRadioButton3.setText(answer[2]);
                             }
                         }
-                        else 
-                        {
-                            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
-                        }
                     }
                 }
             } catch (IOException ex) {
@@ -1438,8 +1972,7 @@ public class mainWindow extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null, "Tests nav pieejams izpildei", "Informācija", JOptionPane.INFORMATION_MESSAGE);
         }
-        
-    }//GEN-LAST:event_studentStartTestButtonActionPerformed
+    }//GEN-LAST:event_studentStartTestButton1ActionPerformed
 
     private void studentExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentExitButtonActionPerformed
         type = null;
@@ -1453,7 +1986,7 @@ public class mainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_studentExitButtonActionPerformed
 
     private void teacherStartTestButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacherStartTestButton1ActionPerformed
-        if(work == true)
+        if(work1 == true)
         {
             JOptionPane.showMessageDialog(null, "Tests jau ir pieejams izpildei", "Informācija", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -1461,21 +1994,20 @@ public class mainWindow extends javax.swing.JFrame {
         {
             int choice = JOptionPane.showConfirmDialog(null, "Dod iespēju veikt testu?","Apstiprinājums", JOptionPane.YES_NO_OPTION);
             if (choice == JOptionPane.YES_OPTION) {
-                work = true;
+                work1 = true;
                 JOptionPane.showMessageDialog(null, "Tests ir pieejams izpildei.");
             } else if (choice == JOptionPane.NO_OPTION) {
                 JOptionPane.showMessageDialog(null, "Tests nav pieejams izpildei.");
             }
         }
-        
     }//GEN-LAST:event_teacherStartTestButton1ActionPerformed
 
     private void teacherTestStatusButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacherTestStatusButton1ActionPerformed
-        if(work == true){
+        if(work1 == true){
             JOptionPane.showMessageDialog(null, "Tests ir pieejams izpildei!", "Informācija", JOptionPane.INFORMATION_MESSAGE);
             int choice = JOptionPane.showConfirmDialog(null, "Pabeigt testu?","Apstiprinājums", JOptionPane.YES_NO_OPTION);
             if (choice == JOptionPane.YES_OPTION) {
-                work = false;
+                work1 = false;
                 JOptionPane.showMessageDialog(null, "Tests ir pabeigts.");
             } 
         }
@@ -1497,21 +2029,46 @@ public class mainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_teacherExtButtonActionPerformed
 
     private void nextQuestionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextQuestionButtonActionPerformed
+        if(questionRadioButton1.isSelected())
+        {
+            selectedAnswer = questionRadioButton1.getText();
+        }
+        else if(questionRadioButton2.isSelected())
+        {
+            selectedAnswer = questionRadioButton2.getText();
+        }
+        else if(questionRadioButton3.isSelected())
+        {
+            selectedAnswer = questionRadioButton3.getText();
+        }
+        else
+        {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount++;
+        
         if(questionCount <= 20)
         {
-            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-                {
+            if(test1 == true)
+            {
+                try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
-                        String[] parts = line.split("\n");
+                        String[] parts = line.split("\\|");
                         if (parts.length == 6) 
                         { 
                             int savedquestionCount = Integer.parseInt(parts[0]);
                             String savedtext = parts[1];
                             String savedanswer[] = {parts[2], parts[3], parts[4]};
                             int savedcorrectAnswer = Integer.parseInt(parts[5]); 
-                            
+
                             if(savedquestionCount == questionCount)
                             {
                                 text = savedtext;
@@ -1527,14 +2084,43 @@ public class mainWindow extends javax.swing.JFrame {
                                 questionRadioButton3.setText(answer[2]);
                             }
                         }
-                        else 
-                        {
-                            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else if(test2 == true)
+            {
+                try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        String[] parts = line.split("\\|");
+                        if (parts.length == 6) 
+                        { 
+                            int savedquestionCount = Integer.parseInt(parts[0]);
+                            String savedtext = parts[1];
+                            String savedanswer[] = {parts[2], parts[3], parts[4]};
+                            int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                            if(savedquestionCount == questionCount)
+                            {
+                                text = savedtext;
+                                answer[0] = savedanswer[0];
+                                answer[1] = savedanswer[1];
+                                answer[2] = savedanswer[2];
+                                correctAnswer = savedcorrectAnswer;
+                                question = new Question(text, answer, correctAnswer);
+
+                                questionLabel.setText(question.getText());
+                                questionRadioButton1.setText(answer[0]);
+                                questionRadioButton2.setText(answer[1]);
+                                questionRadioButton3.setText(answer[2]);
+                            }
                         }
                     }
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
         }
         else
@@ -1542,17 +2128,150 @@ public class mainWindow extends javax.swing.JFrame {
             int choice = JOptionPane.showConfirmDialog(null, "Pabeigt testu?","Apstiprinājums", JOptionPane.YES_NO_OPTION);
             if (choice == JOptionPane.YES_OPTION) {
                 JOptionPane.showMessageDialog(null, "Tests ir pabeigts.");
+                
+                if(test1 == true)
+                {
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("rezultati1Test.txt"))) {
+                    for (int i = 0; i < 20; i++) {
+                        if (selectedAnswers[i] != null) {
+                            writer.write((i + 1) + "|" + selectedAnswers[i] + "|" + correctAnswers[i] + "|" + results[i]);
+                            writer.newLine();
+                        }
+                    }
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog(null, "Kļūda saglabājot rezultātus!", "Kļūda", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                    rightAnswersCount = 0;
+                    for (int i = 0; i < results.length; i++) {
+                        if ("Pareizi".equals(results[i])) {
+                            rightAnswersCount++;
+                        }
+                    }  
+
+                    percent = result.getPercent(rightAnswersCount, 20);
+                    grade = result.getGradeFromPercent(percent);
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("statistika1Test.txt", true))) {
+                        writer.write(percent + "|" + grade);
+                        writer.newLine();
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog(null, "Kļūda saglabājot statistiku!", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                    int sum = 0;
+                    int count = 0;
+                    try (BufferedReader reader = new BufferedReader(new FileReader("statistika1Test.txt"))) {
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            String[] parts = line.split("\\|");
+                            if (parts.length == 2) {
+                                sum += Integer.parseInt(parts[0]);
+                                count++;
+                            }
+                        }
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog(null, "Kļūda nolasot statistiku!", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                    average = (count > 0 ? sum / count : 0) / 10;
+                    avgPercent = average * 10;
+                }
+                else if(test2 == true)
+                {
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("rezultati2Test.txt"))) {
+                    for (int i = 0; i < 20; i++) {
+                        if (selectedAnswers[i] != null) {
+                            writer.write((i + 1) + "|" + selectedAnswers[i] + "|" + correctAnswers[i] + "|" + results[i]);
+                            writer.newLine();
+                        }
+                    }
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog(null, "Kļūda saglabājot rezultātus!", "Kļūda", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                    rightAnswersCount = 0;
+                    for (int i = 0; i < results.length; i++) {
+                        if ("Pareizi".equals(results[i])) {
+                            rightAnswersCount++;
+                        }
+                    }  
+
+                    percent = result.getPercent(rightAnswersCount, 20);
+                    grade = result.getGradeFromPercent(percent);
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("statistika2Test.txt", true))) {
+                        writer.write(percent + "|" + grade);
+                        writer.newLine();
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog(null, "Kļūda saglabājot statistiku!", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                    int sum = 0;
+                    int count = 0;
+                    try (BufferedReader reader = new BufferedReader(new FileReader("statistika2Test.txt"))) {
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            String[] parts = line.split("\\|");
+                            if (parts.length == 2) {
+                                sum += Integer.parseInt(parts[0]);
+                                count++;
+                            }
+                        }
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog(null, "Kļūda nolasot statistiku!", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                    }
+                    average = (count > 0 ? sum / count : 0) / 10;
+                    avgPercent = average * 10;
+                }
+                
+                        
+                testQuestion.setVisible(false);
+                percentageLabel1.setText("Procenti: " + percent + "%");
+                markLabel1.setText("Atzīme: " + grade);
+                
+                percentageLabel2.setText("Procenti: " + avgPercent + "%");
+                markLabel2.setText("Atzīme: " + average);
+                
+                if (grade == 10){resultComentLabel.setText("Izcili!");}
+                else if (grade == 9) {resultComentLabel.setText("Teicami!");}
+                else if (grade == 8) {resultComentLabel.setText("Ļoti labi!");}
+                else if (grade == 7) {resultComentLabel.setText("Labi!");}
+                else if (grade == 6) {resultComentLabel.setText("Apmierinoši!");}
+                else if (grade == 5) {resultComentLabel.setText("Pietiekami!");}
+                else if (grade == 4) {resultComentLabel.setText("Gandrīz pietiekami!");}
+                else if (grade == 3) {resultComentLabel.setText("Nepietiekami!");}
+                else if (grade == 2) {resultComentLabel.setText("Ļoti nepietiekami!");}
+                else {resultComentLabel.setText("Ļoti vājš sniegums!");}
+                
+                testResult.setSize(800,650);
+                testResult.setLocationRelativeTo(null);
+                testResult.setVisible(true);
             } 
         }
     }//GEN-LAST:event_nextQuestionButtonActionPerformed
 
     private void question1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question1ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+
+        questionButtonGroup.clearSelection();
         questionCount = 1;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -1568,31 +2287,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question1ActionPerformed
 
     private void question2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question2ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 2;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -1608,31 +2373,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question2ActionPerformed
 
     private void question3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question3ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 3;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -1648,31 +2459,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question3ActionPerformed
 
     private void question4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question4ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 4;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -1688,31 +2545,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question4ActionPerformed
 
     private void question5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question5ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 5;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -1728,31 +2631,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question5ActionPerformed
 
     private void question6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question6ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 6;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -1768,31 +2717,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question6ActionPerformed
 
     private void question8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question8ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 8;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -1808,31 +2803,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question8ActionPerformed
 
     private void question9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question9ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 9;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -1848,31 +2889,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question9ActionPerformed
 
     private void question10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question10ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 10;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -1888,31 +2975,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question10ActionPerformed
 
     private void question12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question12ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 12;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -1928,31 +3061,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question12ActionPerformed
 
     private void question13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question13ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 13;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -1968,31 +3147,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question13ActionPerformed
 
     private void question14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question14ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 14;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -2008,31 +3233,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question14ActionPerformed
 
     private void question15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question15ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 15;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -2048,31 +3319,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question15ActionPerformed
 
     private void question16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question16ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 16;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -2088,31 +3405,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question16ActionPerformed
 
     private void question17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question17ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 17;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -2128,31 +3491,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question17ActionPerformed
 
     private void question18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question18ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 18;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -2168,31 +3577,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question18ActionPerformed
 
     private void question19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question19ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 19;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -2208,31 +3663,77 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question19ActionPerformed
 
     private void question20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question20ActionPerformed
+        if (questionRadioButton1.isSelected()) {
+            selectedAnswer = questionRadioButton1.getText();
+        } else if (questionRadioButton2.isSelected()) {
+            selectedAnswer = questionRadioButton2.getText();
+        } else if (questionRadioButton3.isSelected()) {
+            selectedAnswer = questionRadioButton3.getText();
+        } else {
+            selectedAnswer = "Atbilde nav izvēlēta";
+        }
+
+        String correct = question.isCorrect(question.getCorrectAnswer());
+        selectedAnswers[questionCount - 1] = selectedAnswer;
+        correctAnswers[questionCount - 1] = correct;
+        results[questionCount - 1] = selectedAnswer.equals(correct) ? "Pareizi" : "Nepareizi";
+        
+        questionButtonGroup.clearSelection();
         questionCount = 20;
-        try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi.txt"))) {
-            {
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
+                    String[] parts = line.split("\\|");
                     if (parts.length == 6) 
                     { 
                         int savedquestionCount = Integer.parseInt(parts[0]);
@@ -2248,34 +3749,235 @@ public class mainWindow extends javax.swing.JFrame {
                             answer[2] = savedanswer[2];
                             correctAnswer = savedcorrectAnswer;
                             question = new Question(text, answer, correctAnswer);
-                            
+
                             questionLabel.setText(question.getText());
                             questionRadioButton1.setText(answer[0]);
                             questionRadioButton2.setText(answer[1]);
                             questionRadioButton3.setText(answer[2]);
                         }
                     }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 6) 
+                    { 
+                        int savedquestionCount = Integer.parseInt(parts[0]);
+                        String savedtext = parts[1];
+                        String savedanswer[] = {parts[2], parts[3], parts[4]};
+                        int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+
+                        if(savedquestionCount == questionCount)
+                        {
+                            text = savedtext;
+                            answer[0] = savedanswer[0];
+                            answer[1] = savedanswer[1];
+                            answer[2] = savedanswer[2];
+                            correctAnswer = savedcorrectAnswer;
+                            question = new Question(text, answer, correctAnswer);
+
+                            questionLabel.setText(question.getText());
+                            questionRadioButton1.setText(answer[0]);
+                            questionRadioButton2.setText(answer[1]);
+                            questionRadioButton3.setText(answer[2]);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_question20ActionPerformed
 
     private void questionEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questionEndButtonActionPerformed
-        // TODO add your handling code here:
+        int choice = JOptionPane.showConfirmDialog(null, "Pabeigt testu?","Apstiprinājums", JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, "Tests ir pabeigts.");
+
+            if(test1 == true)
+            {
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("rezultati1Test.txt"))) {
+                for (int i = 0; i < 20; i++) {
+                    if (selectedAnswers[i] != null) {
+                        writer.write((i + 1) + "|" + selectedAnswers[i] + "|" + correctAnswers[i] + "|" + results[i]);
+                        writer.newLine();
+                    }
+                }
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null, "Kļūda saglabājot rezultātus!", "Kļūda", JOptionPane.ERROR_MESSAGE);
+                }
+
+                rightAnswersCount = 0;
+                for (int i = 0; i < results.length; i++) {
+                    if ("Pareizi".equals(results[i])) {
+                        rightAnswersCount++;
+                    }
+                }  
+
+                percent = result.getPercent(rightAnswersCount, 20);
+                grade = result.getGradeFromPercent(percent);
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("statistika1Test.txt", true))) {
+                    writer.write(percent + "|" + grade);
+                    writer.newLine();
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null, "Kļūda saglabājot statistiku!", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+
+                int sum = 0;
+                int count = 0;
+                try (BufferedReader reader = new BufferedReader(new FileReader("statistika1Test.txt"))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        String[] parts = line.split("\\|");
+                        if (parts.length == 2) {
+                            sum += Integer.parseInt(parts[0]);
+                            count++;
+                        }
+                    }
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null, "Kļūda nolasot statistiku!", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+                average = (count > 0 ? sum / count : 0) / 10;
+                avgPercent = average * 10;
+            }
+            
+            else if(test2 == true)
+            {
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("rezultati2Test.txt"))) {
+                for (int i = 0; i < 20; i++) {
+                    if (selectedAnswers[i] != null) {
+                        writer.write((i + 1) + "|" + selectedAnswers[i] + "|" + correctAnswers[i] + "|" + results[i]);
+                        writer.newLine();
+                    }
+                }
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null, "Kļūda saglabājot rezultātus!", "Kļūda", JOptionPane.ERROR_MESSAGE);
+                }
+
+                rightAnswersCount = 0;
+                for (int i = 0; i < results.length; i++) {
+                    if ("Pareizi".equals(results[i])) {
+                        rightAnswersCount++;
+                    }
+                }  
+
+                percent = result.getPercent(rightAnswersCount, 20);
+                grade = result.getGradeFromPercent(percent);
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("statistika2Test.txt", true))) {
+                    writer.write(percent + "|" + grade);
+                    writer.newLine();
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null, "Kļūda saglabājot statistiku!", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+
+                int sum = 0;
+                int count = 0;
+                try (BufferedReader reader = new BufferedReader(new FileReader("statistika2Test.txt"))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        String[] parts = line.split("\\|");
+                        if (parts.length == 2) {
+                            sum += Integer.parseInt(parts[0]);
+                            count++;
+                        }
+                    }
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null, "Kļūda nolasot statistiku!", "Kļuda", JOptionPane.ERROR_MESSAGE);
+                }
+                average = (count > 0 ? sum / count : 0) / 10;
+                avgPercent = average * 10;
+            }
+
+
+            testQuestion.setVisible(false);
+            percentageLabel1.setText("Procenti: " + percent + "%");
+            markLabel1.setText("Atzīme: " + grade);
+
+            percentageLabel2.setText("Procenti: " + avgPercent + "%");
+            markLabel2.setText("Atzīme: " + average);
+            if (grade == 10){resultComentLabel.setText("Izcili!");}
+            else if (grade == 9) {resultComentLabel.setText("Teicami!");}
+            else if (grade == 8) {resultComentLabel.setText("Ļoti labi!");}
+            else if (grade == 7) {resultComentLabel.setText("Labi!");}
+            else if (grade == 6) {resultComentLabel.setText("Apmierinoši!");}
+            else if (grade == 5) {resultComentLabel.setText("Pietiekami!");}
+            else if (grade == 4) {resultComentLabel.setText("Gandrīz pietiekami!");}
+            else if (grade == 3) {resultComentLabel.setText("Nepietiekami!");}
+            else if (grade == 2) {resultComentLabel.setText("Ļoti nepietiekami!");}
+            else {resultComentLabel.setText("Ļoti vājš sniegums!");}
+            testResult.setSize(800,650);
+            testResult.setLocationRelativeTo(null);
+            testResult.setVisible(true);
+        } 
     }//GEN-LAST:event_questionEndButtonActionPerformed
 
     private void seeAnswerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeAnswerButtonActionPerformed
-        // TODO add your handling code here:
+        if(test1 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("rezultati1Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 5) 
+                    { 
+                        questionCount = Integer.valueOf(parts[0]);
+                        selectedAnswers[questionCount - 1] = String.valueOf(parts[1]);
+                        correctAnswers[questionCount - 1] = String.valueOf(parts[2]);
+                        results[questionCount - 1] = parts[3];
+                        
+                        testAnswerOutput.append(questionCount + ". Jautājums :\n");
+                        testAnswerOutput.append("Izvēlētā atbilde: " + selectedAnswer + "\n");
+                        testAnswerOutput.append("Pareizā atbilde: " + correctAnswers[questionCount - 1] + "\n");
+                        testAnswerOutput.append("Rezultāts: " + results[questionCount - 1] + "\n");
+                        testAnswerOutput.append("----------------------------------------------------\n");
+                    }   
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(test2 == true)
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader("rezultati2Test.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 5) 
+                    { 
+                        questionCount = Integer.valueOf(parts[0]);
+                        selectedAnswers[questionCount - 1] = String.valueOf(parts[1]);
+                        correctAnswers[questionCount - 1] = String.valueOf(parts[2]);
+                        results[questionCount - 1] = parts[3];
+                        
+                        testAnswerOutput.append(questionCount + ". Jautājums :\n");
+                        testAnswerOutput.append("Izvēlētā atbilde: " + selectedAnswer + "\n");
+                        testAnswerOutput.append("Pareizā atbilde: " + correctAnswers[questionCount - 1] + "\n");
+                        testAnswerOutput.append("Rezultāts: " + results[questionCount - 1] + "\n");
+                        testAnswerOutput.append("----------------------------------------------------\n");
+                    }
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        testResult.setVisible(false);
+        testAnswer.setSize(800,600);
+        testAnswer.setLocationRelativeTo(null);
+        testAnswer.setVisible(true);
     }//GEN-LAST:event_seeAnswerButtonActionPerformed
 
     private void resultEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultEndButtonActionPerformed
-        // TODO add your handling code here:
+        testResult.setVisible(false);
+        studentTest.setSize(800,650);
+        studentTest.setLocationRelativeTo(null);
+        studentTest.setVisible(true);
     }//GEN-LAST:event_resultEndButtonActionPerformed
 
     private void exitMainMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMainMenuMouseClicked
@@ -2303,28 +4005,113 @@ public class mainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_exitRegistrationMenuMouseClicked
 
     private void helpMainMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpMainMenuMouseClicked
-        // TODO add your handling code here:
+        helpLogin.setSize(800,600);
+        helpLogin.setLocationRelativeTo(null);
+        helpLogin.setVisible(true);
     }//GEN-LAST:event_helpMainMenuMouseClicked
 
-    private void helpResultMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpResultMenuMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_helpResultMenuMouseClicked
-
-    private void helpTestMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpTestMenuMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_helpTestMenuMouseClicked
-
-    private void helpTeacherTestMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpTeacherTestMenuMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_helpTeacherTestMenuMouseClicked
-
-    private void helpStudentTestMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpStudentTestMenuMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_helpStudentTestMenuMouseClicked
-
     private void helpRegistrationMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpRegistrationMenuMouseClicked
-        // TODO add your handling code here:
+        helpRegistration.setSize(800,600);
+        helpRegistration.setLocationRelativeTo(null);
+        helpRegistration.setVisible(true);
     }//GEN-LAST:event_helpRegistrationMenuMouseClicked
+
+    private void teacherStartTestButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacherStartTestButton2ActionPerformed
+        if(work2 == true)
+        {
+            JOptionPane.showMessageDialog(null, "Tests jau ir pieejams izpildei", "Informācija", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else
+        {
+            int choice = JOptionPane.showConfirmDialog(null, "Dod iespēju veikt testu?","Apstiprinājums", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                work2 = true;
+                JOptionPane.showMessageDialog(null, "Tests ir pieejams izpildei.");
+            } else if (choice == JOptionPane.NO_OPTION) {
+                JOptionPane.showMessageDialog(null, "Tests nav pieejams izpildei.");
+            }
+        }
+    }//GEN-LAST:event_teacherStartTestButton2ActionPerformed
+
+    private void teacherTestStatusButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacherTestStatusButton2ActionPerformed
+        if(work2 == true){
+            JOptionPane.showMessageDialog(null, "Tests ir pieejams izpildei!", "Informācija", JOptionPane.INFORMATION_MESSAGE);
+            int choice = JOptionPane.showConfirmDialog(null, "Pabeigt testu?","Apstiprinājums", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                work2 = false;
+                JOptionPane.showMessageDialog(null, "Tests ir pabeigts.");
+            } 
+        }
+        else 
+        {
+            JOptionPane.showMessageDialog(null, "Tests nav pieejams izpildei!", "Informācija", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_teacherTestStatusButton2ActionPerformed
+
+    private void studentStartTestButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentStartTestButton2ActionPerformed
+        if(work2 == true)
+        {
+            test2 = true;
+            test1 = false;
+            questionButtonGroup.clearSelection();
+            questionCount = 1;
+            try (BufferedReader reader = new BufferedReader(new FileReader("jautajumi2Test.txt"))) {
+                {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        String[] parts = line.split("\\|");
+                        if (parts.length == 6) 
+                        { 
+                            int savedquestionCount = Integer.parseInt(parts[0]);
+                            String savedtext = parts[1];
+                            String savedanswer[] = {parts[2], parts[3], parts[4]};
+                            int savedcorrectAnswer = Integer.parseInt(parts[5]); 
+                            
+                            if(savedquestionCount == questionCount)
+                            {
+                                text = savedtext;
+                                answer[0] = savedanswer[0];
+                                answer[1] = savedanswer[1];
+                                answer[2] = savedanswer[2];
+                                correctAnswer = savedcorrectAnswer;
+                                question = new Question(text, answer, correctAnswer);
+
+                                questionLabel.setText(question.getText());
+                                questionRadioButton1.setText(answer[0]);
+                                questionRadioButton2.setText(answer[1]);
+                                questionRadioButton3.setText(answer[2]);
+                            }
+                        }
+                    }
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Notika kļūda", "Kļuda", JOptionPane.ERROR_MESSAGE);
+            }
+            studentTest.setVisible(false);
+            testQuestion.setSize(800,650);
+            testQuestion.setLocationRelativeTo(null);
+            testQuestion.setVisible(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Tests nav pieejams izpildei", "Informācija", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_studentStartTestButton2ActionPerformed
+
+    private void testAnswerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testAnswerButtonActionPerformed
+        testAnswer.setVisible(false);
+        testResult.setSize(800,650);
+        testResult.setLocationRelativeTo(null);
+        testResult.setVisible(true);
+    }//GEN-LAST:event_testAnswerButtonActionPerformed
+
+    private void helpRegistrationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpRegistrationButtonActionPerformed
+        helpRegistration.setVisible(false);
+    }//GEN-LAST:event_helpRegistrationButtonActionPerformed
+
+    private void helpLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpLoginButtonActionPerformed
+        helpLogin.setVisible(false);
+    }//GEN-LAST:event_helpLoginButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2368,12 +4155,41 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu exitStudentTestMenu;
     private javax.swing.JMenu exitTeacherTestMenu;
     private javax.swing.JMenu exitTestMenu;
+    private javax.swing.JDialog helpLogin;
+    private javax.swing.JButton helpLoginButton;
+    private javax.swing.JLabel helpLoginLabel1;
+    private javax.swing.JLabel helpLoginLabel2;
+    private javax.swing.JLabel helpLoginLabel3;
+    private javax.swing.JLabel helpLoginLabel4;
+    private javax.swing.JLabel helpLoginLabel5;
+    private javax.swing.JPanel helpLoginPanel1;
+    private javax.swing.JPanel helpLoginPanel2;
     private javax.swing.JMenu helpMainMenu;
+    private javax.swing.JLabel helpRegistartionBackground;
+    private javax.swing.JLabel helpRegistartionBackground1;
+    private javax.swing.JLabel helpRegistartionBackground2;
+    private javax.swing.JLabel helpRegistartionLabel1;
+    private javax.swing.JLabel helpRegistartionLabel3;
+    private javax.swing.JPanel helpRegistartionPanel1;
+    private javax.swing.JPanel helpRegistartionPanel3;
+    private javax.swing.JDialog helpRegistration;
+    private javax.swing.JDialog helpRegistration2;
+    private javax.swing.JButton helpRegistrationButton;
+    private javax.swing.JLabel helpRegistrationLabel1;
+    private javax.swing.JLabel helpRegistrationLabel13;
+    private javax.swing.JLabel helpRegistrationLabel14;
+    private javax.swing.JLabel helpRegistrationLabel15;
+    private javax.swing.JLabel helpRegistrationLabel16;
+    private javax.swing.JLabel helpRegistrationLabel17;
+    private javax.swing.JLabel helpRegistrationLabel18;
+    private javax.swing.JLabel helpRegistrationLabel2;
+    private javax.swing.JLabel helpRegistrationLabel3;
+    private javax.swing.JLabel helpRegistrationLabel4;
+    private javax.swing.JLabel helpRegistrationLabel5;
+    private javax.swing.JLabel helpRegistrationLabel6;
     private javax.swing.JMenu helpRegistrationMenu;
-    private javax.swing.JMenu helpResultMenu;
-    private javax.swing.JMenu helpStudentTestMenu;
-    private javax.swing.JMenu helpTeacherTestMenu;
-    private javax.swing.JMenu helpTestMenu;
+    private javax.swing.JPanel helpRegistrationPanel2;
+    private javax.swing.JPanel helpRegistrationPanel4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel mainBackground;
     private javax.swing.JButton mainButton1;
@@ -2445,8 +4261,8 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField registrationTextField3;
     private javax.swing.JTextField registrationTextField4;
     private javax.swing.JTextField registrationTextField5;
-    private javax.swing.JDialog result;
     private javax.swing.JLabel resultBackground;
+    private javax.swing.JLabel resultComentLabel;
     private javax.swing.JButton resultEndButton;
     private javax.swing.JLabel resultLabel1;
     private javax.swing.JLabel resultLabel2;
@@ -2454,22 +4270,36 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuBar resultMenuBar;
     private javax.swing.JPanel resultPanel;
     private javax.swing.JButton seeAnswerButton;
-    private javax.swing.JLabel stidentTestLabel;
     private javax.swing.JButton studentExitButton;
-    private javax.swing.JButton studentStartTestButton;
+    private javax.swing.JButton studentStartTestButton1;
+    private javax.swing.JButton studentStartTestButton2;
     private javax.swing.JDialog studentTest;
     private javax.swing.JLabel studentTestBackground;
+    private javax.swing.JLabel studentTestLabel1;
+    private javax.swing.JLabel studentTestLabel2;
     private javax.swing.JMenuBar studentTestMenuBar;
     private javax.swing.JPanel studentTestPanel;
     private javax.swing.JButton teacherExtButton;
     private javax.swing.JButton teacherStartTestButton1;
+    private javax.swing.JButton teacherStartTestButton2;
     private javax.swing.JDialog teacherTest;
     private javax.swing.JLabel teacherTestBackground;
+    private javax.swing.JLabel teacherTestLabel1;
+    private javax.swing.JLabel teacherTestLabel2;
     private javax.swing.JMenuBar teacherTestMenuBar;
-    private javax.swing.JPanel teacherTestPanel;
+    private javax.swing.JPanel teacherTestPanel1;
     private javax.swing.JButton teacherTestStatusButton1;
+    private javax.swing.JButton teacherTestStatusButton2;
+    private javax.swing.JDialog testAnswer;
+    private javax.swing.JLabel testAnswerBackground;
+    private javax.swing.JButton testAnswerButton;
+    private javax.swing.JLabel testAnswerLabel;
+    private javax.swing.JTextArea testAnswerOutput;
+    private javax.swing.JPanel testAnswerPanel;
+    private javax.swing.JScrollPane testAnswerScrollPane;
     private javax.swing.JLabel testBackground;
     private javax.swing.JMenuBar testMenuBar;
     private javax.swing.JDialog testQuestion;
+    private javax.swing.JDialog testResult;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,7 +12,6 @@ import java.util.List;
  * @author Roberts Erts
  */
 public class DistanceExamenator{
-    private List<User> users = new ArrayList<>();
     private List<Question> questions = new ArrayList<>();
     private String name;
     private boolean work = false;
@@ -25,14 +24,6 @@ public class DistanceExamenator{
 
     public List<Question> getQuestions() {
         return questions;
-    }
-
-    public void getResults() {
-        // Implement result display
-    }
-
-    public void getAvgResults() {
-        // Implement average calculation
     }
     
     public String getName(){
