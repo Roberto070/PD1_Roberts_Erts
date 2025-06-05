@@ -6,8 +6,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import classes.*;
+import java.nio.channels.FileChannel;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -1925,6 +1930,12 @@ public class mainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_question11ActionPerformed
 
     private void studentStartTestButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentStartTestButton1ActionPerformed
+        try {
+            FileChannel.open(Paths.get("rezultati1Test.txt"), StandardOpenOption.WRITE).truncate(0).close();
+        } catch (IOException ex) {
+            Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         if(work1 == true)
         {
             test1 = true;
@@ -3919,21 +3930,22 @@ public class mainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_questionEndButtonActionPerformed
 
     private void seeAnswerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeAnswerButtonActionPerformed
+        testAnswerOutput.setText("");
         if(test1 == true)
         {
             try (BufferedReader reader = new BufferedReader(new FileReader("rezultati1Test.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     String[] parts = line.split("\\|");
-                    if (parts.length == 5) 
+                    if (parts.length == 4) 
                     { 
-                        questionCount = Integer.valueOf(parts[0]);
+                        questionCount = Integer.parseInt(parts[0]);
                         selectedAnswers[questionCount - 1] = String.valueOf(parts[1]);
                         correctAnswers[questionCount - 1] = String.valueOf(parts[2]);
                         results[questionCount - 1] = parts[3];
                         
                         testAnswerOutput.append(questionCount + ". Jautājums :\n");
-                        testAnswerOutput.append("Izvēlētā atbilde: " + selectedAnswer + "\n");
+                        testAnswerOutput.append("Izvēlētā atbilde: " + selectedAnswers[questionCount - 1] + "\n");
                         testAnswerOutput.append("Pareizā atbilde: " + correctAnswers[questionCount - 1] + "\n");
                         testAnswerOutput.append("Rezultāts: " + results[questionCount - 1] + "\n");
                         testAnswerOutput.append("----------------------------------------------------\n");
@@ -3949,15 +3961,15 @@ public class mainWindow extends javax.swing.JFrame {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     String[] parts = line.split("\\|");
-                    if (parts.length == 5) 
+                    if (parts.length == 4) 
                     { 
-                        questionCount = Integer.valueOf(parts[0]);
+                        questionCount = Integer.parseInt(parts[0]);
                         selectedAnswers[questionCount - 1] = String.valueOf(parts[1]);
                         correctAnswers[questionCount - 1] = String.valueOf(parts[2]);
                         results[questionCount - 1] = parts[3];
                         
                         testAnswerOutput.append(questionCount + ". Jautājums :\n");
-                        testAnswerOutput.append("Izvēlētā atbilde: " + selectedAnswer + "\n");
+                        testAnswerOutput.append("Izvēlētā atbilde: " + selectedAnswers[questionCount - 1] + "\n");
                         testAnswerOutput.append("Pareizā atbilde: " + correctAnswers[questionCount - 1] + "\n");
                         testAnswerOutput.append("Rezultāts: " + results[questionCount - 1] + "\n");
                         testAnswerOutput.append("----------------------------------------------------\n");
@@ -4049,6 +4061,12 @@ public class mainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_teacherTestStatusButton2ActionPerformed
 
     private void studentStartTestButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentStartTestButton2ActionPerformed
+        try {
+            FileChannel.open(Paths.get("rezultati1Test.txt"), StandardOpenOption.WRITE).truncate(0).close();
+        } catch (IOException ex) {
+            Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         if(work2 == true)
         {
             test2 = true;
